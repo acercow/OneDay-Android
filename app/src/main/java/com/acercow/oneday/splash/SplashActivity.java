@@ -18,17 +18,44 @@ import com.acercow.oneday.utils.ActivityUtils;
 
 import java.lang.ref.WeakReference;
 
-public class SplashActivity extends BaseActivity implements SplashContract.View, View.OnClickListener {
+public class SplashActivity extends BaseActivity implements SplashContract.View {
     private SplashContract.Presenter mPresenter;
     private TextView tvTimerCountdown;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
+    protected void onCreate(Bundle savedInstanceState) {
         new SplashPresenter(this);
+        super.setFullScreen(true);
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void initParms(Bundle parms) {
+
+    }
+
+    @Override
+    public int bindLayout() {
+        return R.layout.activity_splash;
+    }
+
+    @Override
+    public void initView(View view) {
         tvTimerCountdown = findViewById(R.id.tv_timer_countdown);
         tvTimerCountdown.setOnClickListener(this);
+    }
+
+    @Override
+    public void doBusiness(Context mContext) {
+    }
+
+    @Override
+    public void onSingleClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_timer_countdown:
+                jumpToNext();
+                break;
+        }
     }
 
     @Override
@@ -60,7 +87,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View,
 
     @Override
     public void jumpToNext() {
-        ActivityUtils.startActivity(this, HomeActivity.class);
+        startActivity(HomeActivity.class);
         finish();
     }
 
@@ -75,13 +102,4 @@ public class SplashActivity extends BaseActivity implements SplashContract.View,
         super.onDestroy();
         mPresenter.destroy();
     }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.tv_timer_countdown:
-                jumpToNext();
-                break;
-        }
-     }
 }
