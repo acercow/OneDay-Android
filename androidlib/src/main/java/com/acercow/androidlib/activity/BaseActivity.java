@@ -1,4 +1,4 @@
-package com.acercow.oneday;
+package com.acercow.androidlib.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.acercow.androidlib.BaseApplication;
 
 /**
  * Created by JansenZhao on 2017/11/16.
@@ -33,8 +35,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        isDebug = OneDayApplication.isDebug;
-        APP_NAME = OneDayApplication.APP_NAME;
+        isDebug = BaseApplication.isDebug;
         $Log(TAG + "-->onCreate()");
         try {
             Bundle bundle = getIntent().getExtras();

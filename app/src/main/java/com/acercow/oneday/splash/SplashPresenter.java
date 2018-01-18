@@ -5,10 +5,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 
+import com.acercow.androidlib.utils.ExecutorUtils;
 import com.acercow.oneday.bean.DiaryBean;
 import com.acercow.oneday.bean.TaskBean;
 import com.acercow.oneday.bean.UserInfoBean;
-import com.acercow.oneday.utils.ExecutorUtils;
 
 import java.lang.ref.WeakReference;
 import java.util.Timer;

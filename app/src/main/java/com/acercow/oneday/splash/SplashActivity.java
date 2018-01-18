@@ -1,22 +1,14 @@
 package com.acercow.oneday.splash;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.os.Handler;
-import android.os.Message;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.acercow.oneday.BaseActivity;
+import com.acercow.androidlib.activity.BaseActivity;
 import com.acercow.oneday.R;
 import com.acercow.oneday.note.HomeActivity;
-import com.acercow.oneday.utils.ActivityUtils;
-
-import java.lang.ref.WeakReference;
 
 public class SplashActivity extends BaseActivity implements SplashContract.View {
     private SplashContract.Presenter mPresenter;

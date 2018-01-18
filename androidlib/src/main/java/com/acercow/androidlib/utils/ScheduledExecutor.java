@@ -1,4 +1,4 @@
-package com.acercow.oneday.utils;
+package com.acercow.androidlib.utils;
 
 import android.support.annotation.NonNull;
 
