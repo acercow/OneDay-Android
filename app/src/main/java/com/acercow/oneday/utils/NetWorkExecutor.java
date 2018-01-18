@@ -11,7 +11,7 @@ import java.util.concurrent.Executors;
  * <p>Proxy to execute network thread</p>
  */
 
-public class NetWorkExecutor implements Executor {
+class NetWorkExecutor implements Executor {
     private final Executor mNetWorkExecutor;
 
     public NetWorkExecutor(int threadCount) {

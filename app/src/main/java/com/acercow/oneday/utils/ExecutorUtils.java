@@ -1,9 +1,5 @@
 package com.acercow.oneday.utils;
 
-import android.os.Handler;
-import android.os.Looper;
-import android.support.annotation.NonNull;
-
 import java.util.concurrent.Executor;
 
 /**
@@ -19,13 +15,26 @@ public class ExecutorUtils {
     private Executor networkIO;
     private Executor mainUI;
 
-    ExecutorUtils(Executor fileIO, Executor networkIO, Executor mainUI) {
+    private static ExecutorUtils instance;
+
+    public static ExecutorUtils getInstance() {
+        if (instance == null) {
+            synchronized (ExecutorUtils.class) {
+                if (instance == null) {
+                    instance = new ExecutorUtils();
+                }
+            }
+        }
+        return instance;
+    }
+
+    private ExecutorUtils(Executor fileIO, Executor networkIO, Executor mainUI) {
         this.fileIO = fileIO;
         this.networkIO = networkIO;
         this.mainUI = mainUI;
     }
 
-    public ExecutorUtils() {
+    private ExecutorUtils() {
         this(new FileExecutor(), new NetWorkExecutor(FIXED_NET_THREADS), new MainThreadExecutor());
     }
 

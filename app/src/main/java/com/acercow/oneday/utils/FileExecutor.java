@@ -9,7 +9,7 @@ import java.util.concurrent.Executors;
  * Created by JansenZhao on 2017/11/15.
  */
 
-public class FileExecutor implements Executor {
+ class FileExecutor implements Executor {
 
     private final Executor mFileExecutor;
 

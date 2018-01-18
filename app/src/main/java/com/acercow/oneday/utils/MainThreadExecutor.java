@@ -10,7 +10,7 @@ import java.util.concurrent.Executor;
  * Created by JansenZhao on 2017/11/15.
  */
 
-public class MainThreadExecutor implements Executor {
+class MainThreadExecutor implements Executor {
     private final Handler mHandler;
     public MainThreadExecutor() {
         mHandler = new Handler(Looper.getMainLooper());

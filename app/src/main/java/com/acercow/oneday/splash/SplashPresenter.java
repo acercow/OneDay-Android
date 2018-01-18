@@ -8,8 +8,6 @@ import android.support.annotation.NonNull;
 import com.acercow.oneday.bean.DiaryBean;
 import com.acercow.oneday.bean.TaskBean;
 import com.acercow.oneday.bean.UserInfoBean;
-import com.acercow.oneday.note.HomeActivity;
-import com.acercow.oneday.utils.ActivityUtils;
 import com.acercow.oneday.utils.ExecutorUtils;
 
 import java.lang.ref.WeakReference;
@@ -36,6 +34,9 @@ public class SplashPresenter implements SplashContract.Presenter {
 
     @Override
     public void startCountdown(int seconds) {
+
+
+
         mCountdown = seconds;
         mTimer = new Timer();
         mTimer.schedule(new TimerTask() {
@@ -73,7 +74,7 @@ public class SplashPresenter implements SplashContract.Presenter {
 
     @Override
     public void start() {
-        mExecutor = new ExecutorUtils();
+        mExecutor = ExecutorUtils.getInstance();
     }
 
     @Override
