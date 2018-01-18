@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.acercow.androidlib.activity.BaseActivity;
 import com.acercow.oneday.R;
-import com.acercow.oneday.note.HomeActivity;
 
 public class SplashActivity extends BaseActivity implements SplashContract.View {
     private SplashContract.Presenter mPresenter;
@@ -54,7 +53,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     protected void onStart() {
         super.onStart();
         mPresenter.start();
-        mPresenter.startCountdown(6);
+        mPresenter.startCountdown(1);
     }
 
     @Override
@@ -79,7 +78,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
 
     @Override
     public void jumpToNext() {
-        startActivity(HomeActivity.class);
+        startActivity(PermissionGrantActivity.class);
         finish();
     }
 
