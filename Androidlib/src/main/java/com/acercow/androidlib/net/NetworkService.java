@@ -1,7 +1,5 @@
 package com.acercow.androidlib.net;
 
-import android.content.Context;
-
 /**
  * Created by jansen on 2018/1/19.
  */
@@ -26,7 +24,7 @@ public class NetworkService<T> {
     }
 
 
-    public void invoke(Context context, String key, S)
+
 
 
 
