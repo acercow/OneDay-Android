@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.acercow.oneday.splash.PermissionGrantActivity">
+    tools:context="com.acercow.oneday.permissiongrant.PermissionGrantActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_answers"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" />
 
-    </android.support.v7.widget.RecyclerView>
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/tv_test"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:background="@color/colorAccent"
+        android:text="@string/app_name"
+        android:gravity="center"
+        android:layout_height="50dp" />
+
+</RelativeLayout>

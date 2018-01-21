@@ -23,11 +23,6 @@ public class NetworkService<T> {
         return instance;
     }
 
-
-
-
-
-
     public interface RequestCallback<T> {
         void onSuccess(T response);
         void onFail(String strError);

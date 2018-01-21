@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.acercow.androidlib.activity.BaseActivity;
 import com.acercow.oneday.R;
+import com.acercow.oneday.permissiongrant.PermissionGrantActivity;
 
 public class SplashActivity extends BaseActivity implements SplashContract.View {
     private SplashContract.Presenter mPresenter;

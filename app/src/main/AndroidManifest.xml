@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".note.HomeActivity"></activity>
-        <activity android:name=".splash.PermissionGrantActivity"></activity>
+        <activity android:name=".permissiongrant.PermissionGrantActivity"></activity>
     </application>
 
 </manifest>
