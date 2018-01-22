@@ -1,0 +1,8 @@
+{
+  "isError" : true,
+  "errorType" : 1,
+  "errorMessage" : "Network Error",
+  "result" : {
+    "text" : "niubi"
+  }
+}
