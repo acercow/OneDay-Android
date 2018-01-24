@@ -9,6 +9,7 @@ public class UrlData {
     private String key;
     private long expires;
     private String netType;
+    private String mockClass;
     private String url;
 
     public String getKey() {
@@ -41,5 +42,13 @@ public class UrlData {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getMockClass() {
+        return mockClass;
+    }
+
+    public void setMockClass(String mockClass) {
+        this.mockClass = mockClass;
     }
 }

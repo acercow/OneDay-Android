@@ -11,10 +11,10 @@ import retrofit2.http.Query;
  */
 
 public interface SOService {
-    @GET("/answers?order=desc&sort=activity&site=stackoverflow")
+    @GET("?order=desc&sort=activity&site=stackoverflow")
     Observable<SOAnswersResponse> getAnswers();
 
-    @GET("/answers?order=desc&sort=activity&site=stackoverflow")
+    @GET("?order=desc&sort=activity&site=stackoverflow")
     Observable<SOAnswersResponse> getAnswers(@Query("tagged") String tags);
 
 }

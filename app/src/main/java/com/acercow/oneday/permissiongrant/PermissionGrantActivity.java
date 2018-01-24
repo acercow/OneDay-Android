@@ -13,8 +13,9 @@ import android.widget.Toast;
 import com.acercow.androidlib.activity.BaseActivity;
 import com.acercow.oneday.R;
 import com.acercow.oneday.bean.Item;
+import com.acercow.oneday.bean.SOAnswersResponse;
+import com.acercow.oneday.net.ApiUtils;
 import com.acercow.oneday.net.SOService;
-import com.acercow.oneday.net.UrlConfigManager;
 
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
@@ -25,8 +26,10 @@ import io.reactivex.BackpressureStrategy;
 import io.reactivex.Flowable;
 import io.reactivex.FlowableEmitter;
 import io.reactivex.FlowableOnSubscribe;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class PermissionGrantActivity extends BaseActivity {
@@ -79,35 +82,37 @@ public class PermissionGrantActivity extends BaseActivity {
 
     @Override
     public void doBusiness(Context mContext) {
-        flowTest();
-//        mService = ApiUtils.getSOService();
-//        mService.getAnswers()
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Observer<SOAnswersResponse>() {
-//                    @Override
-//                    public void onSubscribe(Disposable d) {
-//                        Log.v(TAG, "onSubscribe");
-//                    }
-//
-//                    @Override
-//                    public void onNext(SOAnswersResponse soAnswersResponse) {
-//                        Log.v(TAG, "onNext " + soAnswersResponse);
-//                        mAdapter.updateAnswers(soAnswersResponse.getItems());
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        Log.v(TAG, "onError");
-//
-//                    }
-//
-//                    @Override
-//                    public void onComplete() {
-//                        Log.v(TAG, "onComplete");
-//
-//                    }
-//                });
+//        flowTest();
+        String s = ApiUtils.getMockService(mContext, "getBaseResponse");
+
+        mService = ApiUtils.getService(mContext, "getSOTest", SOService.class);
+        mService.getAnswers()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<SOAnswersResponse>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        Log.v(TAG, "onSubscribe");
+                    }
+
+                    @Override
+                    public void onNext(SOAnswersResponse soAnswersResponse) {
+                        Log.v(TAG, "onNext " + soAnswersResponse);
+                        mAdapter.updateAnswers(soAnswersResponse.getItems());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.v(TAG, "onError");
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        Log.v(TAG, "onComplete");
+
+                    }
+                });
 
 //        mService.getAnswers().enqueue(new Callback<SOAnswersResponse>() {
 //            @Override

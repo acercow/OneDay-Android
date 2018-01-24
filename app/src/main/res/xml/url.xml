@@ -2,7 +2,22 @@
 <url>
     <Node
         Key="getSOTest"
-        Expires="300"
+        Expires="0"
         NetType="GET"
-        Url="https://api.stackexchange.com/2.2/answers"/>
+        MockClass=""
+        Url="https://api.stackexchange.com/2.2/answers/"/>
+
+    <Node
+        Key="getBaseResponse"
+        Expires="0"
+        NetType="GET"
+        MockClass="com.acercow.oneday.mockdata.MockBaseResponse"
+        Url="https://api.stackexchange.com/2.2/answers/"/>
+
+    <Node
+        Key="getTest2"
+        Expires="0"
+        NetType="GET"
+        MockClass=""
+        Url="https://api.stackexchange.com/2.2/answers/"/>
 </url>
