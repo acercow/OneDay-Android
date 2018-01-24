@@ -7,7 +7,7 @@ import android.app.Application;
  */
 
 public class BaseApplication extends Application {
-    public static boolean isDebug;
+    public static boolean isDebug = true;
 
     @Override
     public void onCreate() {

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<url>
+    <Node
+        Key="getSOTest"
+        Expires="300"
+        NetType="GET"
+        Url="https://api.stackexchange.com/2.2/answers"/>
+</url>

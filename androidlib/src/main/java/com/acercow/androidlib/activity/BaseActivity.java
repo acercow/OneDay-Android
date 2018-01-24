@@ -212,7 +212,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      */
     protected void $Log(String msg) {
         if (isDebug) {
-            Log.d(APP_NAME, msg);
+            Log.d(TAG, msg);
         }
     }
 
