@@ -37,31 +37,29 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         isDebug = BaseApplication.isDebug;
         $Log(TAG + "-->onCreate()");
-        try {
-            Bundle bundle = getIntent().getExtras();
-            initParms(bundle);
-            mContextView = LayoutInflater.from(this)
-                    .inflate(bindLayout(), null);
-            if (isFullScreen) {
-                this.getWindow().setFlags(
-                        WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                        WindowManager.LayoutParams.FLAG_FULLSCREEN);
-                requestWindowFeature(Window.FEATURE_NO_TITLE);
-            }
-            if (isTranslucentStatusBar) {
-                steepStatusBar();
-            }
-            setContentView(mContextView);
+
+        Bundle bundle = getIntent().getExtras();
+        initParms(bundle);
+        mContextView = LayoutInflater.from(this)
+                .inflate(bindLayout(), null);
+        if (isFullScreen) {
+            this.getWindow().setFlags(
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            requestWindowFeature(Window.FEATURE_NO_TITLE);
+        }
+        if (isTranslucentStatusBar) {
+            steepStatusBar();
+        }
+        setContentView(mContextView);
 //            if (isLandscape) {
 //                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 //            } else {
 //                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 //            }
-            initView(mContextView);
-            doBusiness(this);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        initView(mContextView);
+        doBusiness(this);
+
     }
 
     /**

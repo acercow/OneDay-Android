@@ -11,11 +11,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.acercow.androidlib.activity.BaseActivity;
+import com.acercow.androidlib.net.Response;
 import com.acercow.oneday.R;
+import com.acercow.oneday.bean.DiaryBean;
 import com.acercow.oneday.bean.Item;
 import com.acercow.oneday.bean.SOAnswersResponse;
 import com.acercow.oneday.net.ApiUtils;
 import com.acercow.oneday.net.SOService;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
@@ -83,8 +87,11 @@ public class PermissionGrantActivity extends BaseActivity {
     @Override
     public void doBusiness(Context mContext) {
 //        flowTest();
-        String s = ApiUtils.getMockService(mContext, "getBaseResponse");
+        String s = ApiUtils.getMockJsonString(mContext, "getBaseResponse");
 
+        mTvTest.setText(s);
+        Gson gson = new Gson();
+        Response<DiaryBean> response = gson.fromJson(s, new TypeToken<Response<DiaryBean>>(){}.getType());
         mService = ApiUtils.getService(mContext, "getSOTest", SOService.class);
         mService.getAnswers()
                 .subscribeOn(Schedulers.io())
@@ -194,5 +201,9 @@ public class PermissionGrantActivity extends BaseActivity {
                         Log.d(TAG, "onComplete");
                     }
                 });
+    }
+
+    public void cacheTest() {
+
     }
 }

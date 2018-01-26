@@ -33,6 +33,7 @@ public class UrlConfigManager {
                         urlData.setUrl(xrp.getAttributeValue(null, "Url"));
                         urlData.setExpires(Long.valueOf(xrp.getAttributeValue(null, "Expires")));
                         urlData.setNetType(xrp.getAttributeValue(null, "NetType"));
+                        urlData.setMockClass(xrp.getAttributeValue(null, "MockClass"));
                         sUrlDatalist.add(urlData);
                     }
                 }

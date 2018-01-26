@@ -29,7 +29,7 @@ public class ApiUtils {
         return null;
     }
 
-    public static String getMockService(Context context, String urlKey) {
+    public static String getMockJsonString(Context context, String urlKey) {
         UrlData urlData = UrlConfigManager.findUrlData(context, urlKey);
         if (urlData != null) {
             try {
