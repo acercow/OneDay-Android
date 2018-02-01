@@ -16,6 +16,7 @@ import com.acercow.oneday.R;
 import com.acercow.oneday.bean.DiaryBean;
 import com.acercow.oneday.bean.Item;
 import com.acercow.oneday.bean.SOAnswersResponse;
+import com.acercow.oneday.example.DiskLruUtils;
 import com.acercow.oneday.net.ApiUtils;
 import com.acercow.oneday.net.SOService;
 import com.google.gson.Gson;
@@ -120,6 +121,9 @@ public class PermissionGrantActivity extends BaseActivity {
 
                     }
                 });
+        DiskLruUtils utils = new DiskLruUtils();
+        utils.open(this);
+        utils.writeToCache("http://www.mairuan.com/Public/item/uploads/image/20161114/1479114735584461.jpg");
 
 //        mService.getAnswers().enqueue(new Callback<SOAnswersResponse>() {
 //            @Override
