@@ -1,22 +1,35 @@
 package com.acercow.oneday.data;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
 import java.util.Objects;
 
 /**
  * Created by zhaosen on 2018/2/1.
  */
 
-public class NoteBean {
-
+@Entity
+public class Note {
+    @PrimaryKey
     private String id;
-    private int weather;
-    private int emotion;
-    private int color;
 
+    @ColumnInfo
+    private int weather;
+    @ColumnInfo
+    private int emotion;
+    @ColumnInfo
+    private int color;
+    @ColumnInfo
     private long date;
+    @ColumnInfo
     private long location;
+    @ColumnInfo
     private String author;
+    @ColumnInfo
     private String title;
+    @ColumnInfo
     private String content;
 
     public String getId() {
@@ -99,11 +112,11 @@ public class NoteBean {
         if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        NoteBean noteBean = (NoteBean) obj;
-//        return Objects.equals(this.getId(), noteBean.getId());
-        return Objects.equals(id, noteBean.id) &&
-               Objects.equals(title, noteBean.title) &&
-                Objects.equals(content, noteBean.content);
+        Note note = (Note) obj;
+//        return Objects.equals(this.getId(), note.getId());
+        return Objects.equals(id, note.id) &&
+               Objects.equals(title, note.title) &&
+                Objects.equals(content, note.content);
     }
 
     @Override

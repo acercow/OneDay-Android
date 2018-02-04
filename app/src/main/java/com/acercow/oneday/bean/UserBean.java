@@ -1,18 +1,18 @@
-package com.acercow.oneday.data;
+package com.acercow.oneday.bean;
 
 /**
  * Created by zhaosen on 2018/2/1.
  */
 
 public class UserBean {
-    private long id;
+    private String id;
     private String nickName;
     private String email;
     private int gender;
     private int phone;
 
 
-    public UserBean(long id, String nickName, String email, int gender, int phone) {
+    public UserBean(String id, String nickName, String email, int gender, int phone) {
         this.id = id;
         this.nickName = nickName;
         this.email = email;
@@ -21,11 +21,11 @@ public class UserBean {
     }
 
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -61,6 +61,7 @@ public class UserBean {
         this.phone = phone;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -68,16 +69,17 @@ public class UserBean {
 
         UserBean userBean = (UserBean) o;
 
-        if (id != userBean.id) return false;
-        if (!nickName.equals(userBean.nickName)) return false;
-        return email.equals(userBean.email);
+        if (id != null ? !id.equals(userBean.id) : userBean.id != null) return false;
+        if (nickName != null ? !nickName.equals(userBean.nickName) : userBean.nickName != null)
+            return false;
+        return email != null ? email.equals(userBean.email) : userBean.email == null;
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + nickName.hashCode();
-        result = 31 * result + email.hashCode();
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (nickName != null ? nickName.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
         return result;
     }
 }

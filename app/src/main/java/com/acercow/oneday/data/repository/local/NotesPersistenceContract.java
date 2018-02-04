@@ -1,4 +1,4 @@
-package com.acercow.oneday.data.repository;
+package com.acercow.oneday.data.repository.local;
 
 import android.provider.BaseColumns;
 

@@ -12,10 +12,10 @@ import io.reactivex.Flowable;
  */
 
 public interface NoteDataSource {
-    Flowable<List<NoteBean>> getNotes();
-    Flowable<Optional<NoteBean>> getNote(@NonNull long id);
+    Flowable<List<Note>> getNotes();
+    Flowable<Optional<Note>> getNote(@NonNull long id);
 
-    void saveNote(@NonNull NoteBean noteBean);
+    void saveNote(@NonNull Note note);
     void deleteNote(@NonNull long noteId);
     void deleteAll();
 }
