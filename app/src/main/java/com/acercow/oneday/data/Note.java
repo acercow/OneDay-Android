@@ -15,21 +15,14 @@ public class Note {
     @PrimaryKey
     private String id;
 
-    @ColumnInfo
     private int weather;
-    @ColumnInfo
     private int emotion;
-    @ColumnInfo
     private int color;
-    @ColumnInfo
     private long date;
-    @ColumnInfo
     private long location;
-    @ColumnInfo
     private String author;
-    @ColumnInfo
     private String title;
-    @ColumnInfo
+    @ColumnInfo(name = "content")
     private String content;
 
     public String getId() {
