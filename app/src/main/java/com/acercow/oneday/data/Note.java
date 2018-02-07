@@ -25,6 +25,18 @@ public class Note {
     @ColumnInfo(name = "content")
     private String content;
 
+    public Note(String id, int weather, int emotion, int color, long date, long location, String author, String title, String content) {
+        this.id = id;
+        this.weather = weather;
+        this.emotion = emotion;
+        this.color = color;
+        this.date = date;
+        this.location = location;
+        this.author = author;
+        this.title = title;
+        this.content = content;
+    }
+
     public String getId() {
         return id;
     }

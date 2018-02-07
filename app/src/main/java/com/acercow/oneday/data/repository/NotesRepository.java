@@ -52,7 +52,11 @@ public class NotesRepository implements NotesDataSource {
             note = getNoteWithId(id);
         }
         if (note == null) {
-            return mNotesLocalDataSource.getNote(id);
+            Flowable<Note> local = getNoteWithIdFromLocalAndCache(id);
+            Flowable<Note> remote = getNoteWithIdFromRemoteAndCache(id);
+            return Flowable.concat(local, remote)
+                    .firstElement()
+                    .toFlowable();
         } else {
             return Flowable.just(note);
         }
@@ -60,6 +64,7 @@ public class NotesRepository implements NotesDataSource {
 
     @Override
     public void saveNote(@NonNull Note note) {
+        mNotesLocalDataSource.saveNote(note);
         mNotesLocalDataSource.saveNote(note);
         if (mCachedNotes == null) {
             mCachedNotes = new LruCache<>(LRUCACHE_SIZE);
@@ -70,6 +75,7 @@ public class NotesRepository implements NotesDataSource {
     @Override
     public void updateNote(@NonNull Note note) {
         mNotesLocalDataSource.updateNote(note);
+        mNotesRemoteDataSource.updateNote(note);
         if (mCachedNotes == null) {
             mCachedNotes = new LruCache<>(LRUCACHE_SIZE);
         }
@@ -79,6 +85,7 @@ public class NotesRepository implements NotesDataSource {
     @Override
     public void deleteNotes(@NonNull Note... notes) {
         mNotesLocalDataSource.deleteNotes(notes);
+        mNotesRemoteDataSource.deleteNotes(notes);
         if (mCachedNotes == null) {
             mCachedNotes = new LruCache<>(LRUCACHE_SIZE);
         }
@@ -90,6 +97,7 @@ public class NotesRepository implements NotesDataSource {
     @Override
     public void deleteAll() {
         mNotesLocalDataSource.deleteAll();
+        mNotesRemoteDataSource.deleteAll();
         if (mCachedNotes == null) {
             mCachedNotes = new LruCache<>(LRUCACHE_SIZE);
         }
@@ -102,5 +110,18 @@ public class NotesRepository implements NotesDataSource {
         } else {
             return null;
         }
+    }
+
+    private Flowable<Note> getNoteWithIdFromLocalAndCache(String id) {
+        return mNotesLocalDataSource.getNote(id)
+                .doOnNext(v -> mCachedNotes.put(v.getId(), v));
+    }
+
+    private Flowable<Note> getNoteWithIdFromRemoteAndCache(String id) {
+        return mNotesRemoteDataSource.getNote(id)
+                .doOnNext(v -> {
+                    mCachedNotes.put(v.getId(), v);
+                    mNotesLocalDataSource.saveNote(v);
+                });
     }
 }
