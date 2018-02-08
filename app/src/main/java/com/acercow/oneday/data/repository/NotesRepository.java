@@ -6,9 +6,12 @@ import android.util.LruCache;
 import com.acercow.oneday.data.Note;
 import com.acercow.oneday.data.NotesDataSource;
 
+import org.reactivestreams.Publisher;
+
 import java.util.List;
 
 import io.reactivex.Flowable;
+import io.reactivex.functions.Function;
 
 /**
  * Created by zhaosen on 2018/2/5.
@@ -53,7 +56,7 @@ public class NotesRepository implements NotesDataSource {
         }
         if (note == null) {
             Flowable<Note> local = getNoteWithIdFromLocalAndCache(id);
-            Flowable<Note> remote = getNoteWithIdFromRemoteAndCache(id);
+            Flowable<Note> remote = getNoteWithIdFromRemoteAndSave(id);
             return Flowable.concat(local, remote)
                     .firstElement()
                     .toFlowable();
@@ -114,14 +117,36 @@ public class NotesRepository implements NotesDataSource {
 
     private Flowable<Note> getNoteWithIdFromLocalAndCache(String id) {
         return mNotesLocalDataSource.getNote(id)
-                .doOnNext(v -> mCachedNotes.put(v.getId(), v));
+                .doOnNext(note -> mCachedNotes.put(note.getId(), note));
     }
 
-    private Flowable<Note> getNoteWithIdFromRemoteAndCache(String id) {
+    private Flowable<Note> getNoteWithIdFromRemoteAndSave(String id) {
         return mNotesRemoteDataSource.getNote(id)
-                .doOnNext(v -> {
-                    mCachedNotes.put(v.getId(), v);
-                    mNotesLocalDataSource.saveNote(v);
+                .doOnNext(note -> {
+                    mCachedNotes.put(note.getId(), note);
+                    mNotesLocalDataSource.saveNote(note);
                 });
+    }
+
+    private Flowable<List<Note>> getAllFromLocalAndCache() {
+        return mNotesLocalDataSource.getNotes()
+                .flatMap(new Function<List<Note>, Publisher<Note>>() {
+                    @Override
+                    public Publisher<Note> apply(List<Note> notes) throws Exception {
+                        return Flowable.fromIterable(notes);
+                    }
+                }).doOnNext(v -> mCachedNotes.put(v.getId(), v))
+                .toList()
+                .toFlowable();
+    }
+
+    private Flowable<List<Note>> getAllFromRemoteAndSave() {
+        return mNotesRemoteDataSource.getNotes()
+                .flatMap(notes -> Flowable.fromIterable(notes))
+                .doOnNext(note -> {
+                    mNotesLocalDataSource.saveNote(note);
+                    mCachedNotes.put(note.getId(), note);
+                }).toList()
+                .toFlowable();
     }
 }
