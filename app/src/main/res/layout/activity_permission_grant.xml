@@ -1,22 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.acercow.oneday.permissiongrant.PermissionGrantActivity">
+    tools:context="com.acercow.oneday.permissiongrant.PermissionGrantActivity"
+    tools:layout_editor_absoluteY="25dp">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_answers"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/permit_text_bg_layout"
+        android:layout_width="286dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="#FFEFEFEF"
+        app:layout_constraintBottom_toTopOf="@+id/permit_text_bg_layout2"
+        app:layout_constraintEnd_toEndOf="@+id/permit_text_bg_layout2"
+        app:layout_constraintStart_toStartOf="@+id/permit_text_bg_layout2">
+
+        <TextView
+            android:id="@+id/title_text_1"
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="6dp"
+            android:text="Location"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/desc_text_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.073"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.571" />
+
+        <TextView
+            android:id="@+id/desc_text_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="8dp"
+            android:text="We’d like to retrieving your location when creating journals "
+            android:textColor="#FF8F8E94"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/title_text_1"
+            app:layout_constraintTop_toBottomOf="@+id/title_text_1" />
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/permit_text_bg_layout2"
+        android:layout_width="286dp"
+        android:layout_height="80dp"
+        android:layout_marginBottom="72dp"
+        android:background="#FFEFEFEF"
+        app:layout_constraintBottom_toTopOf="@+id/button2"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <TextView
+            android:id="@+id/title_text_2"
+            android:layout_width="wrap_content"
+            android:layout_height="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="6dp"
+            android:text="Camera"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/desc_text_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.073"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.571" />
+
+        <TextView
+            android:id="@+id/desc_text_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="8dp"
+            android:text="We’d like to retrieving your location when creating journals "
+            android:textColor="#FF8F8E94"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/title_text_2"
+            app:layout_constraintTop_toBottomOf="@+id/title_text_2" />
+    </android.support.constraint.ConstraintLayout>
 
     <TextView
-        android:id="@+id/tv_test"
-        android:layout_alignParentBottom="true"
-        android:layout_width="match_parent"
-        android:background="@color/colorAccent"
-        android:text="@string/app_name"
-        android:gravity="center"
-        android:layout_height="50dp" />
+        android:id="@+id/permit_desc_text"
+        android:layout_width="286dp"
+        android:layout_height="58dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:gravity="center_horizontal"
+        android:text="OneDay will request for permissions to provide better service. Please click GRANT when prompt."
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/permit_text_bg_layout"
+        app:layout_constraintEnd_toEndOf="@+id/permit_text_bg_layout"
+        app:layout_constraintStart_toStartOf="@+id/permit_text_bg_layout" />
 
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/permit_icon"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:adjustViewBounds="false"
+        android:cropToPadding="false"
+        app:layout_constraintBottom_toTopOf="@+id/permit_desc_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.68"
+        app:srcCompat="?android:attr/actionModePasteDrawable" />
+
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginBottom="96dp"
+        android:background="#FF5ED5D1"
+        android:padding="6dp"
+        android:text="Confirm"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

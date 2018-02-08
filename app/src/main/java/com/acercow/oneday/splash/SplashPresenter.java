@@ -72,13 +72,14 @@ public class SplashPresenter implements SplashContract.Presenter {
         return null;
     }
 
+
     @Override
-    public void start() {
+    public void subscribe() {
         mExecutor = ExecutorUtils.getInstance();
     }
 
     @Override
-    public void destroy() {
+    public void unSubscribe() {
         mTimer.cancel();
     }
 

@@ -7,15 +7,7 @@ import android.net.Uri;
  */
 
 public class HomePresenter implements HomeContract.Presenter {
-    @Override
-    public void start() {
 
-    }
-
-    @Override
-    public void destroy() {
-
-    }
 
     @Override
     public void search() {
@@ -44,6 +36,16 @@ public class HomePresenter implements HomeContract.Presenter {
 
     @Override
     public void sendSound(Uri uri) {
+
+    }
+
+    @Override
+    public void subscribe() {
+
+    }
+
+    @Override
+    public void unSubscribe() {
 
     }
 }

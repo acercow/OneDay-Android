@@ -5,6 +5,6 @@ package com.acercow.oneday;
  */
 
 public interface BasePresenter {
-    void start();
-    void destroy();
+    void subscribe();
+    void unSubscribe();
 }

@@ -3,6 +3,7 @@ package com.acercow.oneday.data;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
 
 import java.util.Objects;
 
@@ -10,8 +11,9 @@ import java.util.Objects;
  * Created by zhaosen on 2018/2/1.
  */
 
-@Entity
+@Entity(tableName = "notes")
 public class Note {
+    @NonNull
     @PrimaryKey
     private String id;
 
@@ -22,7 +24,6 @@ public class Note {
     private long location;
     private String author;
     private String title;
-    @ColumnInfo(name = "content")
     private String content;
 
     public Note(String id, int weather, int emotion, int color, long date, long location, String author, String title, String content) {

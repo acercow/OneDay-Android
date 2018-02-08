@@ -53,7 +53,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     @Override
     protected void onStart() {
         super.onStart();
-        mPresenter.start();
+        mPresenter.subscribe();
         mPresenter.startCountdown(1);
     }
 
@@ -92,6 +92,6 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mPresenter.destroy();
+        mPresenter.unSubscribe();
     }
 }
