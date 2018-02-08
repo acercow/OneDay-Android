@@ -1,9 +1,13 @@
 package com.acercow.oneday.splash;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 
 import com.acercow.androidlib.utils.ExecutorUtils;
 import com.acercow.oneday.bean.DiaryBean;
@@ -44,7 +48,7 @@ public class SplashPresenter implements SplashContract.Presenter {
             public void run() {
                 if (mCountdown < 0) {
                     mTimer.cancel();
-                    mSplashView.jumpToNext();
+                    mSplashView.toNextActivity();
                 } else {
                     mExecutor.mainUI().execute(new Runnable() {
                         @Override
@@ -70,6 +74,14 @@ public class SplashPresenter implements SplashContract.Presenter {
     @Override
     public DiaryBean loadDiary(UserInfoBean userInfoBean) {
         return null;
+    }
+
+    @Override
+    public boolean checkPermission(Context context) {
+        int locationPermission = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION);
+        int cameraPermission = ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA);
+        boolean requestPermission = locationPermission != PackageManager.PERMISSION_GRANTED || cameraPermission != PackageManager.PERMISSION_GRANTED;
+        return requestPermission;
     }
 
 

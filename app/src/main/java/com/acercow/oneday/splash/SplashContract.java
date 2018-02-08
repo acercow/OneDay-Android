@@ -1,6 +1,5 @@
 package com.acercow.oneday.splash;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
@@ -22,7 +21,7 @@ public interface SplashContract {
 
         void startAnim();
 
-        void jumpToNext();
+        void toNextActivity();
 
         Context getContext();
     }
@@ -39,6 +38,8 @@ public interface SplashContract {
         TaskBean loadTask(UserInfoBean userInfoBean);
 
         DiaryBean loadDiary(UserInfoBean userInfoBean);
+
+        boolean checkPermission(Context context);
 
     }
 }

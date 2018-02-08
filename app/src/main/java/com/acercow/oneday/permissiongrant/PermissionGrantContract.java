@@ -1,5 +1,7 @@
 package com.acercow.oneday.permissiongrant;
 
+import android.content.Context;
+
 import com.acercow.oneday.BasePresenter;
 import com.acercow.oneday.BaseView;
 
@@ -11,10 +13,10 @@ public class PermissionGrantContract {
 
     interface View extends BaseView<Presenter> {
         void showContentAnim();
+        void toMainActivity();
     }
 
     interface Presenter extends BasePresenter {
-        void requestPermission();
-        void toMainActivity();
+        void requestPermission(Context context, int requestCode);
     }
 }

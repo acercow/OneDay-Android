@@ -8,7 +8,10 @@ import android.widget.TextView;
 
 import com.acercow.androidlib.activity.BaseActivity;
 import com.acercow.oneday.R;
+import com.acercow.oneday.data.repository.local.NotesLocalDataSource;
+import com.acercow.oneday.note.HomeActivity;
 import com.acercow.oneday.permissiongrant.PermissionGrantActivity;
+import com.acercow.oneday.utils.ActivityUtils;
 
 public class SplashActivity extends BaseActivity implements SplashContract.View {
     private SplashContract.Presenter mPresenter;
@@ -16,9 +19,10 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        new SplashPresenter(this);
         super.setFullScreen(true);
         super.onCreate(savedInstanceState);
+        new SplashPresenter(this);
+        NotesLocalDataSource.getInstance(this);
     }
 
     @Override
@@ -45,7 +49,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     public void onSingleClick(View v) {
         switch (v.getId()) {
             case R.id.tv_timer_countdown:
-                jumpToNext();
+                toNextActivity();
                 break;
         }
     }
@@ -78,10 +82,12 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     }
 
     @Override
-    public void jumpToNext() {
-        startActivity(PermissionGrantActivity.class);
-        finish();
+    public void toNextActivity() {
+       boolean needPermission = mPresenter.checkPermission(this);
+       ActivityUtils.startActivity(this, needPermission ? PermissionGrantActivity.class : HomeActivity.class);
+       finish();
     }
+
 
     @Override
     public Context getContext() {
