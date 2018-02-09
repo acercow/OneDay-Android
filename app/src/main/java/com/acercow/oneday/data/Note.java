@@ -1,6 +1,5 @@
 package com.acercow.oneday.data;
 
-import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
@@ -20,13 +19,13 @@ public class Note {
     private int weather;
     private int emotion;
     private int color;
-    private long date;
+    private String date;
     private long location;
     private String author;
     private String title;
     private String content;
 
-    public Note(String id, int weather, int emotion, int color, long date, long location, String author, String title, String content) {
+    public Note(String id, int weather, int emotion, int color, String date, long location, String author, String title, String content) {
         this.id = id;
         this.weather = weather;
         this.emotion = emotion;
@@ -70,11 +69,11 @@ public class Note {
         this.color = color;
     }
 
-    public long getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(long date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

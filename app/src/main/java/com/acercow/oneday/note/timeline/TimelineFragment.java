@@ -3,24 +3,24 @@ package com.acercow.oneday.note.timeline;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.acercow.oneday.BaseFragment;
 import com.acercow.oneday.R;
+import com.acercow.oneday.data.Note;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link TimelineFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link TimelineFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class TimelineFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+
+public class TimelineFragment extends BaseFragment {
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -29,20 +29,12 @@ public class TimelineFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private RecyclerView lvNote;
 
     public TimelineFragment() {
-        // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment TimelineFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static TimelineFragment newInstance(String param1, String param2) {
         TimelineFragment fragment = new TimelineFragment();
         Bundle args = new Bundle();
@@ -64,11 +56,48 @@ public class TimelineFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_diary_list, container, false);
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
+    @Override
+    public int bindLayout() {
+        return R.layout.fragment_diary_list;
+    }
+
+    @Override
+    public void initView(View view) {
+        lvNote = view.findViewById(R.id.list_note);
+    }
+
+    @Override
+    public void doBusiness(Context mContext) {
+        List<Note> fakeNotes = new ArrayList<>();
+        for (int i = 0; i < 15; i++) {
+            Note note;
+            if (i % 3 == 0) {
+                note = new Note("0000000" + i, 1, 1, 1, "2018-02-02", 1, "tester", "test title", "test content");
+            } else {
+                note = new Note("0000000" + i, 1, 1, 1, "2018-02-01", 1, "tester", "test title", "test content");
+            }
+            fakeNotes.add(note);
+        }
+        Collections.sort(fakeNotes, new Comparator<Note>() {
+            @Override
+            public int compare(Note o1, Note o2) {
+                return o1.getDate().compareTo(o2.getDate());
+            }
+        });
+        TimelineAdapter adapter = new TimelineAdapter(getContext());
+        adapter.setData(fakeNotes);
+        lvNote.setLayoutManager(new LinearLayoutManager(getContext()));//这里用线性显示 类似于listview
+        lvNote.setAdapter(adapter);
+    }
+
+    @Override
+    public void widgetClick(View v) {
+
+    }
+
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -92,18 +121,8 @@ public class TimelineFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }

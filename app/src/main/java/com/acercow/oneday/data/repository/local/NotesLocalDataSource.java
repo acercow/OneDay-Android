@@ -10,7 +10,9 @@ import com.acercow.oneday.data.NotesDataSource;
 
 import java.util.List;
 
+import io.reactivex.Completable;
 import io.reactivex.Flowable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by zhaosen on 2018/2/3.
@@ -19,9 +21,12 @@ public class NotesLocalDataSource implements NotesDataSource {
 
     private static NotesLocalDataSource INSTANCE = null;
     private AppDataBase mDatabase = null;
+
     private NotesLocalDataSource(Context context) {
-        mDatabase = Room.databaseBuilder(context.getApplicationContext(), AppDataBase.class, "one-day")
-        .build();
+        Completable.fromAction(() ->
+                mDatabase = Room.databaseBuilder(context.getApplicationContext(), AppDataBase.class, "one-day").build())
+                .subscribeOn(Schedulers.io())
+                .subscribe();
     }
 
     public static NotesLocalDataSource getInstance(Context context) {
@@ -43,22 +48,30 @@ public class NotesLocalDataSource implements NotesDataSource {
 
     @Override
     public void saveNote(@NonNull Note note) {
-        mDatabase.noteDao().insertAll(note);
+        Completable.fromAction(() -> mDatabase.noteDao().insertAll(note))
+                .subscribeOn(Schedulers.io())
+                .subscribe();
     }
 
     @Override
     public void updateNote(@NonNull Note note) {
-        mDatabase.noteDao().updateNotes(note);
+        Completable.fromAction(() -> mDatabase.noteDao().updateNotes(note))
+                .subscribeOn(Schedulers.io())
+                .subscribe();
     }
 
 
     @Override
     public void deleteNotes(@NonNull Note... notes) {
-        mDatabase.noteDao().deleteNotes(notes);
+        Completable.fromAction(() -> mDatabase.noteDao().deleteNotes(notes))
+                .subscribeOn(Schedulers.io())
+                .subscribe();
     }
 
     @Override
     public void deleteAll() {
-        mDatabase.noteDao().deleteAll();
+        Completable.fromAction(() -> mDatabase.noteDao().deleteAll())
+                .subscribeOn(Schedulers.io())
+                .subscribe();
     }
 }

@@ -24,7 +24,6 @@ public class NotesRemoteDataSource implements NotesDataSource {
 
     private NotesRemoteDataSource() {
         FAKE_REMOTE_DATA = new HashMap<>();
-        FAKE_REMOTE_DATA.put("00000000", new Note("00000000", 1, 1, 1, 0, 1, "tester", "test title", "test content"));
     }
 
     public static NotesRemoteDataSource getInstance() {
