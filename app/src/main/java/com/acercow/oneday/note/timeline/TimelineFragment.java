@@ -72,12 +72,14 @@ public class TimelineFragment extends BaseFragment {
     @Override
     public void doBusiness(Context mContext) {
         List<Note> fakeNotes = new ArrayList<>();
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 5; i++) {
             Note note;
             if (i % 3 == 0) {
                 note = new Note("0000000" + i, 1, 1, 1, "2018-02-02", 1, "tester", "test title", "test content");
-            } else {
+            } else if (i % 2 == 0) {
                 note = new Note("0000000" + i, 1, 1, 1, "2018-02-01", 1, "tester", "test title", "test content");
+            } else {
+                note = new Note("0000000" + i, 1, 1, 1, "2018-02-04", 1, "tester", "test title", "test content");
             }
             fakeNotes.add(note);
         }

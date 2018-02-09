@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.acercow.oneday.R;
 import com.acercow.oneday.data.Note;
@@ -53,12 +54,16 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.NoteIt
     public void onBindViewHolder(NoteItemViewHolder holder, int position) {
         Note note = mNotes.get(position);
         if (isTimeTagHidePosition(position)) {
-            holder.cvContent.setVisibility(View.GONE);
+            holder.ltTimeTag.setVisibility(View.GONE);
         } else {
-            holder.cvContent.setVisibility(View.VISIBLE);
+            holder.ltTimeTag.setVisibility(View.VISIBLE);
+            holder.tvTimeDay.setText(note.getDate().substring(8, 10));
         }
         mPreviousDate = note.getDate();
-        holder.tvTitle.setText(note.getDate());
+        holder.tvTitle.setText("Lorem Ipsum   " + note.getDate());
+        holder.ltNoteItem.setOnClickListener(v -> {
+            Toast.makeText(mContext, "[Click]: " + note.getTitle(), Toast.LENGTH_SHORT).show();
+        });
     }
 
     private boolean isTimeTagHidePosition(int position) {
@@ -82,13 +87,17 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.NoteIt
         return mNotes.size();
     }
 
-    public static class NoteItemViewHolder extends RecyclerView.ViewHolder {
-        public View cvContent;
-        public TextView tvTitle;
+    static class NoteItemViewHolder extends RecyclerView.ViewHolder {
+        private View ltTimeTag;
+        private TextView tvTitle;
+        private TextView tvTimeDay;
+        private View ltNoteItem;
         public NoteItemViewHolder(View itemView) {
             super(itemView);
-            cvContent = itemView.findViewById(R.id.list_item_time_tag);
+            ltTimeTag = itemView.findViewById(R.id.list_item_time_tag);
             tvTitle = itemView.findViewById(R.id.note_item_title);
+            tvTimeDay = itemView.findViewById(R.id.timestamp_day);
+            ltNoteItem = itemView.findViewById(R.id.list_item_note);
         }
     }
 
