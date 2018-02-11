@@ -57,13 +57,14 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.NoteIt
             holder.ltTimeTag.setVisibility(View.GONE);
         } else {
             holder.ltTimeTag.setVisibility(View.VISIBLE);
-            holder.tvTimeDay.setText(note.getDate().substring(8, 10));
+            holder.tvTimestampDay.setText(note.getDate().substring(8, 10));
+            holder.tvTimestampMonth.setText(note.getDate().substring(5, 7));
+            holder.tvTimestampYear.setText(note.getDate().substring(0, 4));
         }
         mPreviousDate = note.getDate();
-        holder.tvTitle.setText("Lorem Ipsum   " + note.getDate());
-        holder.ltNoteItem.setOnClickListener(v -> {
-            Toast.makeText(mContext, "[Click]: " + note.getTitle(), Toast.LENGTH_SHORT).show();
-        });
+        holder.tvTitle.setText(note.getTitle());
+        holder.tvContent.setText(note.getContent());
+        holder.ltNoteItem.setOnClickListener(v -> Toast.makeText(mContext, "[Click]: " + note.getTitle(), Toast.LENGTH_SHORT).show());
     }
 
     private boolean isTimeTagHidePosition(int position) {
@@ -90,13 +91,19 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.NoteIt
     static class NoteItemViewHolder extends RecyclerView.ViewHolder {
         private View ltTimeTag;
         private TextView tvTitle;
-        private TextView tvTimeDay;
+        private TextView tvContent;
+        private TextView tvTimestampDay;
+        private TextView tvTimestampMonth;
+        private TextView tvTimestampYear;
         private View ltNoteItem;
         public NoteItemViewHolder(View itemView) {
             super(itemView);
             ltTimeTag = itemView.findViewById(R.id.list_item_time_tag);
             tvTitle = itemView.findViewById(R.id.note_item_title);
-            tvTimeDay = itemView.findViewById(R.id.timestamp_day);
+            tvContent = itemView.findViewById(R.id.note_item_content);
+            tvTimestampDay = itemView.findViewById(R.id.timestamp_day);
+            tvTimestampMonth = itemView.findViewById(R.id.timestamp_month);
+            tvTimestampYear = itemView.findViewById(R.id.timestamp_year);
             ltNoteItem = itemView.findViewById(R.id.list_item_note);
         }
     }

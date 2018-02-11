@@ -12,10 +12,9 @@ import android.view.ViewGroup;
 import com.acercow.oneday.BaseFragment;
 import com.acercow.oneday.R;
 import com.acercow.oneday.data.Note;
+import com.acercow.oneday.mockdata.MockNoteGenerator;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 
@@ -35,7 +34,7 @@ public class TimelineFragment extends BaseFragment {
     }
 
 
-    public static TimelineFragment newInstance(String param1, String param2) {
+    public static TimelineFragment newInstance(String param1, String param2)  {
         TimelineFragment fragment = new TimelineFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -71,27 +70,11 @@ public class TimelineFragment extends BaseFragment {
 
     @Override
     public void doBusiness(Context mContext) {
-        List<Note> fakeNotes = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            Note note;
-            if (i % 3 == 0) {
-                note = new Note("0000000" + i, 1, 1, 1, "2018-02-02", 1, "tester", "test title", "test content");
-            } else if (i % 2 == 0) {
-                note = new Note("0000000" + i, 1, 1, 1, "2018-02-01", 1, "tester", "test title", "test content");
-            } else {
-                note = new Note("0000000" + i, 1, 1, 1, "2018-02-04", 1, "tester", "test title", "test content");
-            }
-            fakeNotes.add(note);
-        }
-        Collections.sort(fakeNotes, new Comparator<Note>() {
-            @Override
-            public int compare(Note o1, Note o2) {
-                return o1.getDate().compareTo(o2.getDate());
-            }
-        });
+        List<Note> mockNotes = MockNoteGenerator.getMockNotes(mContext);
+        Collections.sort(mockNotes, (o1, o2) -> o1.getDate().compareTo(o2.getDate()));
         TimelineAdapter adapter = new TimelineAdapter(getContext());
-        adapter.setData(fakeNotes);
-        lvNote.setLayoutManager(new LinearLayoutManager(getContext()));//这里用线性显示 类似于listview
+        adapter.setData(mockNotes);
+        lvNote.setLayoutManager(new LinearLayoutManager(getContext()));
         lvNote.setAdapter(adapter);
     }
 
