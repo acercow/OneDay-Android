@@ -13,8 +13,8 @@ import android.widget.Toast;
 
 import com.acercow.androidlib.activity.BaseActivity;
 import com.acercow.oneday.R;
-import com.acercow.oneday.note.HomeActivity;
 import com.acercow.oneday.utils.ActivityUtils;
+import com.acercow.oneday.wizard.WizardActivity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -84,7 +84,7 @@ public class PermissionGrantActivity extends BaseActivity implements PermissionG
 
     @Override
     public void toMainActivity() {
-        ActivityUtils.startActivity(this, HomeActivity.class);
+        ActivityUtils.startActivity(this, WizardActivity.class);
         finish();
     }
 

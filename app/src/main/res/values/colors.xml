@@ -6,4 +6,7 @@
     <color name="colorPrimaryDark2">#485a62</color>
 
     <color name="colorSplashBackground">#FFFFFF</color>
+    <color name="colorWizard1">#41ca9b</color>
+    <color name="colorWizard2">#d2491e</color>
+    <color name="colorGrey">#FFEFEFEF</color>
 </resources>

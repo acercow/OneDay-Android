@@ -124,4 +124,11 @@
         <item>@drawable/sample_avator_19</item>
         <item>@drawable/sample_avator_20</item>
     </integer-array>
+
+    <integer-array name="wizard_images">
+        <item>@drawable/ic_book_white_48dp</item>
+        <item>@drawable/ic_insert_invitation_white_48dp</item>
+        <item>@drawable/ic_monochrome_photos_white_48dp</item>
+        <item>@drawable/ic_settings_voice_white_48dp</item>
+    </integer-array>
 </resources>

@@ -9,9 +9,9 @@ import android.widget.TextView;
 import com.acercow.androidlib.activity.BaseActivity;
 import com.acercow.oneday.R;
 import com.acercow.oneday.data.repository.local.NotesLocalDataSource;
-import com.acercow.oneday.note.HomeActivity;
 import com.acercow.oneday.permissiongrant.PermissionGrantActivity;
 import com.acercow.oneday.utils.ActivityUtils;
+import com.acercow.oneday.wizard.WizardActivity;
 
 public class SplashActivity extends BaseActivity implements SplashContract.View {
     private SplashContract.Presenter mPresenter;
@@ -84,7 +84,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     @Override
     public void toNextActivity() {
        boolean needPermission = mPresenter.checkPermission(this);
-       ActivityUtils.startActivity(this, needPermission ? PermissionGrantActivity.class : HomeActivity.class);
+       ActivityUtils.startActivity(this, needPermission ? PermissionGrantActivity.class : WizardActivity.class);
        finish();
     }
 

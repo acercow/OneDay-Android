@@ -23,8 +23,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".note.HomeActivity"></activity>
-        <activity android:name=".permissiongrant.PermissionGrantActivity"></activity>
+        <activity android:name=".note.HomeActivity" />
+        <activity android:name=".permissiongrant.PermissionGrantActivity" />
+        <activity
+            android:name=".wizard.WizardActivity"
+            android:theme="@style/AppTheme.Translucent" />
     </application>
 
 </manifest>
