@@ -27,9 +27,9 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
     private ViewPager mViewPager;
 
     private int[] tabIcons = {
-            android.R.drawable.ic_dialog_map,
-            android.R.drawable.ic_dialog_email,
-            android.R.drawable.ic_dialog_dialer
+            R.drawable.ic_book_white_48dp,
+            R.drawable.ic_insert_invitation_white_48dp,
+            R.drawable.ic_monochrome_photos_white_48dp
     };
 
 

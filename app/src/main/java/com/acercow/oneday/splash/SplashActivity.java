@@ -58,7 +58,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     protected void onStart() {
         super.onStart();
         mPresenter.subscribe();
-        mPresenter.startCountdown(1);
+        mPresenter.startCountdown(3);
     }
 
     @Override
