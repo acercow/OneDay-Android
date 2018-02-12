@@ -7,20 +7,20 @@
 
 
     <RelativeLayout
-        android:layout_width="60dp"
+        android:layout_width="40dp"
         android:layout_height="match_parent">
         <View
             android:layout_width="0.4dp"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="24dp"
-            android:background="@color/colorPrimaryDark2" />
+            android:layout_marginRight="16dp"
+            android:background="@android:color/darker_gray" />
         <View
             android:id="@+id/timeline_node"
             android:layout_width="12dp"
             android:layout_height="12dp"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="18.2dp"
+            android:layout_marginRight="10.2dp"
             android:layout_marginTop="36dp"
             android:background="@drawable/shape_circle_color_primary" />
     </RelativeLayout>
