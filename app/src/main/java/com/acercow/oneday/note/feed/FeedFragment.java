@@ -1,19 +1,21 @@
 package com.acercow.oneday.note.feed;
 
+
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.acercow.oneday.BaseFragment;
 import com.acercow.oneday.R;
-import com.acercow.oneday.note.feed.dummy.DummyContent;
-import com.acercow.oneday.note.feed.dummy.DummyContent.DummyItem;
+import com.acercow.oneday.data.Note;
+import com.acercow.oneday.mockdata.MockNoteGenerator;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -22,27 +24,27 @@ import java.util.List;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class FeedFragment extends Fragment {
+public class FeedFragment extends BaseFragment {
 
-    // TODO: Customize parameter argument names
-    private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
-    private int mColumnCount = 1;
-    private OnListFragmentInteractionListener mListener;
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
 
-    /**
-     * Mandatory empty constructor for the fragment manager to instantiate the
-     * fragment (e.g. upon screen orientation changes).
-     */
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+
+    private FeedFragment.OnFragmentInteractionListener mListener;
+    private RecyclerView lvNote;
+
     public FeedFragment() {
     }
 
-    // TODO: Customize parameter initialization
-    @SuppressWarnings("unused")
-    public static FeedFragment newInstance(int columnCount) {
+
+    public static FeedFragment newInstance(String param1, String param2)  {
         FeedFragment fragment = new FeedFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -50,40 +52,57 @@ public class FeedFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_item_list, container, false);
-
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.setAdapter(new MyItemRecyclerViewAdapter(DummyContent.ITEMS, mListener));
-        }
-        return view;
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
+    @Override
+    public int bindLayout() {
+        return R.layout.fragment_diary_list;
+    }
+
+    @Override
+    public void initView(View view) {
+        lvNote = view.findViewById(R.id.list_note);
+    }
+
+    @Override
+    public void doBusiness(Context mContext) {
+        List<Note> mockNotes = MockNoteGenerator.getMockNotes(mContext);
+        Collections.sort(mockNotes, (o1, o2) -> o1.getDate().compareTo(o2.getDate()));
+        FeedAdapter adapter = new FeedAdapter(getContext());
+        adapter.setData(mockNotes);
+        lvNote.setLayoutManager(new LinearLayoutManager(getContext()));
+        lvNote.setAdapter(adapter);
+    }
+
+    @Override
+    public void widgetClick(View v) {
+
+    }
+
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
+    }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
+        if (context instanceof FeedFragment.OnFragmentInteractionListener) {
+            mListener = (FeedFragment.OnFragmentInteractionListener) context;
         } else {
 //            throw new RuntimeException(context.toString()
-//                    + " must implement OnListFragmentInteractionListener");
+//                    + " must implement OnFragmentInteractionListener");
         }
     }
 
@@ -93,18 +112,8 @@ public class FeedFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnListFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+
+    public interface OnFragmentInteractionListener {
+        void onFragmentInteraction(Uri uri);
     }
 }

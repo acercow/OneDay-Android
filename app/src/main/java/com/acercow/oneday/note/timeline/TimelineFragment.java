@@ -60,7 +60,7 @@ public class TimelineFragment extends BaseFragment {
 
     @Override
     public int bindLayout() {
-        return R.layout.fragment_diary_list;
+        return R.layout.fragment_diary_time_line;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.acercow.oneday.note.timeline;
+package com.acercow.oneday.note.feed;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -18,7 +18,7 @@ import java.util.List;
  * Created by zhaosen on 2018/2/9.
  */
 
-public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.NoteItemViewHolder> {
+public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.NoteItemViewHolder> {
     private List<Note> mNotes = new ArrayList<>();
     private static final int VIEW_TYPE_TIME_TAG = 0;
     private static final int VIEW_TYPE_NOTE_ITEM = 1;
@@ -27,7 +27,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.NoteIt
     private LayoutInflater mLayoutInflater;
     private String mPreviousDate = "";
 
-    public TimelineAdapter(Context context) {
+    public FeedAdapter(Context context) {
         this.mContext = context;
         this.mLayoutInflater = LayoutInflater.from(context);
     }
@@ -47,7 +47,7 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.NoteIt
 
     @Override
     public NoteItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new NoteItemViewHolder(mLayoutInflater.inflate(R.layout.timeline_item_note, parent, false));
+        return new NoteItemViewHolder(mLayoutInflater.inflate(R.layout.card_item_note, parent, false));
     }
 
     @Override
@@ -55,10 +55,8 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.NoteIt
         Note note = mNotes.get(position);
         if (isTimeTagHidePosition(position)) {
             holder.ltTimeTag.setVisibility(View.GONE);
-            holder.timelineNode.setVisibility(View.GONE);
         } else {
             holder.ltTimeTag.setVisibility(View.VISIBLE);
-            holder.timelineNode.setVisibility(View.VISIBLE);
             holder.tvTimestampDay.setText(note.getDate().substring(8, 10));
             holder.tvTimestampMonth.setText(note.getDate().substring(5, 7));
             holder.tvTimestampYear.setText(note.getDate().substring(0, 4));
@@ -98,8 +96,6 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.NoteIt
         private TextView tvTimestampMonth;
         private TextView tvTimestampYear;
         private View ltNoteItem;
-        private View timelineNode;
-
         public NoteItemViewHolder(View itemView) {
             super(itemView);
             ltTimeTag = itemView.findViewById(R.id.list_item_time_tag);
@@ -109,7 +105,6 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.NoteIt
             tvTimestampMonth = itemView.findViewById(R.id.timestamp_month);
             tvTimestampYear = itemView.findViewById(R.id.timestamp_year);
             ltNoteItem = itemView.findViewById(R.id.list_item_note);
-            timelineNode = itemView.findViewById(R.id.timeline_node);
         }
     }
 

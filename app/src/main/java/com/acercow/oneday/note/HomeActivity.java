@@ -59,7 +59,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
         mViewPager = findViewById(R.id.home_view_pager);
         SectionPagerAdapter adapter = new SectionPagerAdapter(getSupportFragmentManager());
         adapter.addPage(TimelineFragment.newInstance("", ""), "");
-        adapter.addPage(FeedFragment.newInstance(1), "");
+        adapter.addPage(FeedFragment.newInstance("", ""), "");
         adapter.addPage(MediaFlowFragment.newInstance("", ""), "");
         mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);
