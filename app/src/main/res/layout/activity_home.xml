@@ -19,7 +19,41 @@
             android:layout_height="?attr/actionBarSize"
             app:contentInsetStartWithNavigation="0dp"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingRight="2dp">
+
+
+
+                <TextView
+                    android:id="@+id/toolbar_username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="?attr/actionBarSize"
+                    android:gravity="center"
+                    android:layout_centerHorizontal="true"
+                    android:text="Jansen"
+                    android:drawableRight="@drawable/ic_keyboard_arrow_down_white_24dp"
+                    android:textSize="22sp" />
+                <ImageView
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:padding="14dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="-12dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_search_white_48dp" />
+                <ImageView
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:padding="14dp"
+                    android:visibility="gone"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_face_white_48dp" />
+            </RelativeLayout>
+        </android.support.v7.widget.Toolbar>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_layout_main"
