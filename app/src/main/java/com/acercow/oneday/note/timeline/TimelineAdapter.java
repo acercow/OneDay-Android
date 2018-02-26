@@ -6,10 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.acercow.oneday.R;
 import com.acercow.oneday.data.Note;
+import com.acercow.oneday.note.edit.EditNoteActivity;
+import com.acercow.oneday.utils.ActivityUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +67,10 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.NoteIt
         mPreviousDate = note.getDate();
         holder.tvTitle.setText(note.getTitle());
         holder.tvContent.setText(note.getContent());
-        holder.ltNoteItem.setOnClickListener(v -> Toast.makeText(mContext, "[Click]: " + note.getTitle(), Toast.LENGTH_SHORT).show());
+//        holder.ltNoteItem.setOnClickListener(v -> Toast.makeText(mContext, "[Click]: " + note.getTitle(), Toast.LENGTH_SHORT).show());
+        holder.ltNoteItem.setOnClickListener(v -> {
+            ActivityUtils.startActivity(mContext, EditNoteActivity.class);
+        });
     }
 
     private boolean isTimeTagHidePosition(int position) {

@@ -1,6 +1,6 @@
 package com.acercow.oneday.utils;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -11,11 +11,11 @@ import android.os.Bundle;
 public class ActivityUtils {
 
 
-    public static void startActivity(Activity fromActivity, Class<?> toActivity) {
+    public static void startActivity(Context fromActivity, Class<?> toActivity) {
        startActivity(fromActivity, toActivity, null);
     }
 
-    public static void startActivity(Activity fromActivity, Class<?> toActivity, Bundle bundle) {
+    public static void startActivity(Context fromActivity, Class<?> toActivity, Bundle bundle) {
         Intent intent = new Intent(fromActivity, toActivity);
         if (bundle != null) {
             intent.putExtras(bundle);
