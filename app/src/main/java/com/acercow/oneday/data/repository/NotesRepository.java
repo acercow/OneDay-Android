@@ -68,11 +68,10 @@ public class NotesRepository implements NotesDataSource {
     @Override
     public void saveNote(@NonNull Note note) {
         mNotesLocalDataSource.saveNote(note);
-        mNotesLocalDataSource.saveNote(note);
         if (mCachedNotes == null) {
             mCachedNotes = new LruCache<>(LRUCACHE_SIZE);
         }
-        mCachedNotes.put(note.getId(), note);
+        mCachedNotes.put(note.getNoteGUID(), note);
     }
 
     @Override
@@ -82,7 +81,7 @@ public class NotesRepository implements NotesDataSource {
         if (mCachedNotes == null) {
             mCachedNotes = new LruCache<>(LRUCACHE_SIZE);
         }
-        mCachedNotes.put(note.getId(), note);
+        mCachedNotes.put(note.getNoteGUID(), note);
     }
 
     @Override
@@ -93,7 +92,7 @@ public class NotesRepository implements NotesDataSource {
             mCachedNotes = new LruCache<>(LRUCACHE_SIZE);
         }
         for (Note note : notes) {
-            mCachedNotes.remove(note.getId());
+            mCachedNotes.remove(note.getNoteGUID());
         }
     }
 
@@ -117,13 +116,13 @@ public class NotesRepository implements NotesDataSource {
 
     private Flowable<Note> getNoteWithIdFromLocalAndCache(String id) {
         return mNotesLocalDataSource.getNote(id)
-                .doOnNext(note -> mCachedNotes.put(note.getId(), note));
+                .doOnNext(note -> mCachedNotes.put(note.getNoteGUID(), note));
     }
 
     private Flowable<Note> getNoteWithIdFromRemoteAndSave(String id) {
         return mNotesRemoteDataSource.getNote(id)
                 .doOnNext(note -> {
-                    mCachedNotes.put(note.getId(), note);
+                    mCachedNotes.put(note.getNoteGUID(), note);
                     mNotesLocalDataSource.saveNote(note);
                 });
     }
@@ -135,7 +134,7 @@ public class NotesRepository implements NotesDataSource {
                     public Publisher<Note> apply(List<Note> notes) throws Exception {
                         return Flowable.fromIterable(notes);
                     }
-                }).doOnNext(v -> mCachedNotes.put(v.getId(), v))
+                }).doOnNext(v -> mCachedNotes.put(v.getNoteGUID(), v))
                 .toList()
                 .toFlowable();
     }
@@ -145,7 +144,7 @@ public class NotesRepository implements NotesDataSource {
                 .flatMap(notes -> Flowable.fromIterable(notes))
                 .doOnNext(note -> {
                     mNotesLocalDataSource.saveNote(note);
-                    mCachedNotes.put(note.getId(), note);
+                    mCachedNotes.put(note.getNoteGUID(), note);
                 }).toList()
                 .toFlowable();
     }

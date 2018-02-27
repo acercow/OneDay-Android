@@ -3,6 +3,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="empty_note_text">No note</string>
 
     <string-array name="wizard_titles">
         <item>De Finibus Bonorum et</item>

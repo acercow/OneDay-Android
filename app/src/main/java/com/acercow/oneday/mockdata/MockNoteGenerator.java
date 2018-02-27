@@ -22,8 +22,7 @@ public class MockNoteGenerator {
     String[] contents = context.getResources().getStringArray(R.array.note_contents);
     String[] dates = context.getResources().getStringArray(R.array.note_date);
     for (int i = 0; i < num; i++) {
-        Note note = new Note("00000000" + i, 1, 1, 1, dates[i], 1, names[i], titles[i], contents[i]);
-        notes.add(note);
+
     }
     return notes;
 }

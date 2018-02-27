@@ -76,12 +76,12 @@ public class FeedFragment extends BaseFragment {
 
     @Override
     public void doBusiness(Context mContext) {
-        List<Note> mockNotes = MockNoteGenerator.getMockNotes(mContext);
-        Collections.sort(mockNotes, (o1, o2) -> o1.getDate().compareTo(o2.getDate()));
-        FeedAdapter adapter = new FeedAdapter(getContext());
-        adapter.setData(mockNotes);
-        lvNote.setLayoutManager(new LinearLayoutManager(getContext()));
-        lvNote.setAdapter(adapter);
+//        List<Note> mockNotes = MockNoteGenerator.getMockNotes(mContext);
+//        Collections.sort(mockNotes, (o1, o2) -> o1.getNoteDate().compareTo(o2.getNoteDate()));
+//        FeedAdapter adapter = new FeedAdapter(getContext());
+//        adapter.setData(mockNotes);
+//        lvNote.setLayoutManager(new LinearLayoutManager(getContext()));
+//        lvNote.setAdapter(adapter);
     }
 
     @Override

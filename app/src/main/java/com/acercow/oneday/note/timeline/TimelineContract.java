@@ -13,9 +13,9 @@ import java.util.List;
 public interface TimelineContract {
 
     interface View extends BaseView<Presenter> {
-        void showNotes();
+        void showNotes(List<Note> notes);
         void showEmptyView();
-        void showNoteDetail(String id);
+        void showNoteDetail(Note note);
         void showNoteDeleted();
         void showNoteSaved();
 
@@ -23,8 +23,8 @@ public interface TimelineContract {
 
     interface Presenter extends BasePresenter {
         void addNote();
-        void editNote(String id);
-        List<Note> deleteNotes(String... ids);
+        void editNote(Note note);
+        void deleteNotes(Note... notes);
         void listNotes();
         void result(int requestCode, int resultCode);
     }

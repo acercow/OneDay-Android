@@ -21,10 +21,10 @@ public interface NoteDao {
     @Query("SELECT * FROM notes")
     Flowable<List<Note>> queryAll();
 
-    @Query("SELECT * FROM notes WHERE id = :id")
+    @Query("SELECT * FROM notes WHERE note_guid = :id")
     Flowable<Note> queryItemById(String id);
 
-    @Query("SELECT * FROM notes WHERE weather = :weather")
+    @Query("SELECT * FROM notes WHERE note_weather = :weather")
     Flowable<List<Note>> queryItemByWeather(int weather);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

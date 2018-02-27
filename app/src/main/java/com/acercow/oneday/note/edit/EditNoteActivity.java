@@ -12,11 +12,19 @@ import android.widget.EditText;
 
 import com.acercow.androidlib.activity.BaseActivity;
 import com.acercow.oneday.R;
+import com.acercow.oneday.data.Injection;
+import com.acercow.oneday.data.Note;
+import com.acercow.oneday.data.NotesDataSource;
+import com.acercow.oneday.utils.DateUtils;
+
+import java.util.UUID;
 
 public class EditNoteActivity extends BaseActivity {
     WebView wvNote;
     EditText etNote;
-    private String mTemp;
+    private String mNoteText;
+    private NotesDataSource notesDataSource;
+    private Note mNote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +33,9 @@ public class EditNoteActivity extends BaseActivity {
 
     @Override
     public void initParms(Bundle parms) {
-
+        if (parms != null) {
+            mNote = (Note) parms.getSerializable("note_GUID");
+        }
     }
 
     @Override
@@ -58,9 +68,9 @@ public class EditNoteActivity extends BaseActivity {
 
 //        String cacheDirPath = getFilesDir().getAbsolutePath() + APP_CACAHE_DIRNAME;
 //        webSettings.setAppCachePath(cacheDirPath); //设置  Application Caches 缓存目录
-        mTemp = "# 未标题";
+        mNoteText = mNote == null ? "# 未标题" : mNote.getNoteContent();
 
-        String body = mTemp.replace("\n", "\\n");
+        String body = mNoteText.replace("\n", "\\n");
 
         String result = "<!doctype html>\n" +
                 "<html>\n" +
@@ -72,7 +82,7 @@ public class EditNoteActivity extends BaseActivity {
                 "<body>\n" +
                 "  <div id=\"content\"></div>\n" +
                 "  <script>\n" +
-                "   function myFunction(body)\n" +
+                "   function show(body)\n" +
                 "  {\n" +
                 "    document.getElementById('content').innerHTML =\n" +
                 "      marked(body);\n" +
@@ -85,7 +95,7 @@ public class EditNoteActivity extends BaseActivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                wvNote.loadUrl("javascript:myFunction(\'" + body + "\')");
+                wvNote.loadUrl("javascript:show(\'" + body + "\')");
             }
         });
         etNote.addTextChangedListener(new TextWatcher() {
@@ -101,26 +111,43 @@ public class EditNoteActivity extends BaseActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                mTemp = s.toString();
+                mNoteText = s.toString();
                 wvNote.loadDataWithBaseURL(null, result, "text/html", "utf-8", null);
                 wvNote.setWebViewClient(new WebViewClient() {
                     @Override
                     public void onPageFinished(WebView view, String url) {
                         super.onPageFinished(view, url);
-                        wvNote.loadUrl("javascript:myFunction(\'" + mTemp.replace("\n", "\\n") + "\')");
+                        wvNote.loadUrl("javascript:show(\'" + mNoteText.replace("\n", "\\n") + "\')");
                     }
                 });
             }
         });
-        etNote.setText(mTemp);
+        etNote.setText(mNoteText);
     }
 
     @Override
     public void doBusiness(Context mContext) {
+        notesDataSource = Injection.getNotesDataRepository(this);
     }
 
     @Override
     public void onSingleClick(View v) {
 
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mNote == null) {
+            mNote = new Note();
+            mNote.setNoteGUID(UUID.randomUUID().toString());
+            mNote.setNoteDate(DateUtils.getFormatDate());
+            mNote.setCreatedDate(DateUtils.getFormatDate());
+        }
+        mNote.setNoteTitle("title");
+        mNote.setNoteContent(mNoteText);
+        mNote.setNoteAbstract(mNoteText);
+        mNote.setModifiedDate(DateUtils.getFormatDate());
+        notesDataSource.saveNote(mNote);
     }
 }

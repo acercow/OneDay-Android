@@ -55,19 +55,19 @@ public class NotesRemoteDataSource implements NotesDataSource {
 
     @Override
     public void saveNote(@NonNull Note note) {
-        FAKE_REMOTE_DATA.put(note.getId(), note);
+        FAKE_REMOTE_DATA.put(note.getNoteGUID(), note);
     }
 
     @Override
     public void updateNote(@NonNull Note note) {
-        FAKE_REMOTE_DATA.put(note.getId(), note);
+        FAKE_REMOTE_DATA.put(note.getNoteGUID(), note);
     }
 
     @Override
     public void deleteNotes(@NonNull Note... notes) {
         for (Note note : notes) {
-            if (FAKE_REMOTE_DATA.containsKey(note.getId())) {
-                FAKE_REMOTE_DATA.remove(note.getId());
+            if (FAKE_REMOTE_DATA.containsKey(note.getNoteGUID())) {
+                FAKE_REMOTE_DATA.remove(note.getNoteGUID());
             }
         }
     }

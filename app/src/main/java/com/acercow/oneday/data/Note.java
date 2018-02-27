@@ -1,131 +1,232 @@
 package com.acercow.oneday.data;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-import java.util.Objects;
+import java.io.Serializable;
 
 /**
  * Created by zhaosen on 2018/2/1.
  */
 
 @Entity(tableName = "notes")
-public class Note {
+public class Note implements Serializable {
     @NonNull
     @PrimaryKey
-    private String id;
+    @ColumnInfo(name = "note_guid")
+    private String noteGUID;
+    @ColumnInfo(name = "note_type")
+    private int noteType;
+    @ColumnInfo(name = "note_author")
+    private String noteAuthor;
+    @ColumnInfo(name = "note_title")
+    private String noteTitle;
+    @ColumnInfo(name = "note_content")
+    private String noteContent;
+    @ColumnInfo(name = "note_abstract")
+    private String noteAbstract;
+    @ColumnInfo(name = "note_color")
+    private int noteColor;
+    @ColumnInfo(name = "note_read_count")
+    private int noteReadCount;
+    @ColumnInfo(name = "note_gps")
+    private long noteGPS;
+    @ColumnInfo(name = "note_location")
+    private String noteLocation;
+    @ColumnInfo(name = "note_md5")
+    private String noteMD5;
+    @ColumnInfo(name = "create_date")
+    private String createdDate;
+    @ColumnInfo(name = "modified_date")
+    private String modifiedDate;
+    @ColumnInfo(name = "note_date")
+    private String noteDate;
+    @ColumnInfo(name = "last_read_date")
+    private String lastReadDate;
+    @ColumnInfo(name = "sync_status")
+    private int syncStatus;
+    @ColumnInfo(name = "anchor")
+    private int anchor;
+    @ColumnInfo(name = "note_weather")
+    private int noteWeather;
+    @ColumnInfo(name = "note_emotion")
+    private int noteEmotion;
 
-    private int weather;
-    private int emotion;
-    private int color;
-    private String date;
-    private long location;
-    private String author;
-    private String title;
-    private String content;
-
-    public Note(String id, int weather, int emotion, int color, String date, long location, String author, String title, String content) {
-        this.id = id;
-        this.weather = weather;
-        this.emotion = emotion;
-        this.color = color;
-        this.date = date;
-        this.location = location;
-        this.author = author;
-        this.title = title;
-        this.content = content;
+    public String getNoteGUID() {
+        return noteGUID;
     }
 
-    public String getId() {
-        return id;
+    public void setNoteGUID(String noteGUID) {
+        this.noteGUID = noteGUID;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public int getNoteType() {
+        return noteType;
     }
 
-    public int getWeather() {
-        return weather;
+    public void setNoteType(int noteType) {
+        this.noteType = noteType;
     }
 
-    public void setWeather(int weather) {
-        this.weather = weather;
+    public String getNoteAuthor() {
+        return noteAuthor;
     }
 
-    public int getEmotion() {
-        return emotion;
+    public void setNoteAuthor(String noteAuthor) {
+        this.noteAuthor = noteAuthor;
     }
 
-    public void setEmotion(int emotion) {
-        this.emotion = emotion;
+    public String getNoteTitle() {
+        return noteTitle;
     }
 
-    public int getColor() {
-        return color;
+    public void setNoteTitle(String noteTitle) {
+        this.noteTitle = noteTitle;
     }
 
-    public void setColor(int color) {
-        this.color = color;
+    public String getNoteContent() {
+        return noteContent;
     }
 
-    public String getDate() {
-        return date;
+    public void setNoteContent(String noteContent) {
+        this.noteContent = noteContent;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public String getNoteAbstract() {
+        return noteAbstract;
     }
 
-    public long getLocation() {
-        return location;
+    public void setNoteAbstract(String noteAbstract) {
+        this.noteAbstract = noteAbstract;
     }
 
-    public void setLocation(long location) {
-        this.location = location;
+    public int getNoteColor() {
+        return noteColor;
     }
 
-    public String getAuthor() {
-        return author;
+    public void setNoteColor(int noteColor) {
+        this.noteColor = noteColor;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public int getNoteReadCount() {
+        return noteReadCount;
     }
 
-    public String getTitle() {
-        return title;
+    public void setNoteReadCount(int noteReadCount) {
+        this.noteReadCount = noteReadCount;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public long getNoteGPS() {
+        return noteGPS;
     }
 
-    public String getContent() {
-        return content;
+    public void setNoteGPS(long noteGPS) {
+        this.noteGPS = noteGPS;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public String getNoteLocation() {
+        return noteLocation;
+    }
+
+    public void setNoteLocation(String noteLocation) {
+        this.noteLocation = noteLocation;
+    }
+
+    public String getNoteMD5() {
+        return noteMD5;
+    }
+
+    public void setNoteMD5(String noteMD5) {
+        this.noteMD5 = noteMD5;
+    }
+
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public String getModifiedDate() {
+        return modifiedDate;
+    }
+
+    public void setModifiedDate(String modifiedDate) {
+        this.modifiedDate = modifiedDate;
+    }
+
+    public String getNoteDate() {
+        return noteDate;
+    }
+
+    public void setNoteDate(String noteDate) {
+        this.noteDate = noteDate;
+    }
+
+    public String getLastReadDate() {
+        return lastReadDate;
+    }
+
+    public void setLastReadDate(String lastReadDate) {
+        this.lastReadDate = lastReadDate;
+    }
+
+    public int getSyncStatus() {
+        return syncStatus;
+    }
+
+    public void setSyncStatus(int syncStatus) {
+        this.syncStatus = syncStatus;
+    }
+
+    public int getAnchor() {
+        return anchor;
+    }
+
+    public void setAnchor(int anchor) {
+        this.anchor = anchor;
+    }
+
+    public int getNoteWeather() {
+        return noteWeather;
+    }
+
+    public void setNoteWeather(int noteWeather) {
+        this.noteWeather = noteWeather;
+    }
+
+    public int getNoteEmotion() {
+        return noteEmotion;
+    }
+
+    public void setNoteEmotion(int noteEmotion) {
+        this.noteEmotion = noteEmotion;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == this) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Note note = (Note) o;
+
+        if (noteGUID != null ? !noteGUID.equals(note.noteGUID) : note.noteGUID != null)
             return false;
-        }
-        Note note = (Note) obj;
-//        return Objects.equals(this.getId(), note.getId());
-        return Objects.equals(id, note.id) &&
-               Objects.equals(title, note.title) &&
-                Objects.equals(content, note.content);
+        if (noteTitle != null ? !noteTitle.equals(note.noteTitle) : note.noteTitle != null)
+            return false;
+        return noteAbstract != null ? noteAbstract.equals(note.noteAbstract) : note.noteAbstract == null;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, content);
+        int result = noteGUID != null ? noteGUID.hashCode() : 0;
+        result = 31 * result + (noteTitle != null ? noteTitle.hashCode() : 0);
+        result = 31 * result + (noteAbstract != null ? noteAbstract.hashCode() : 0);
+        return result;
     }
+
+
 }

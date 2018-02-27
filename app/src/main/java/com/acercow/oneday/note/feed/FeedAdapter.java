@@ -57,14 +57,14 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.NoteItemViewHo
             holder.ltTimeTag.setVisibility(View.GONE);
         } else {
             holder.ltTimeTag.setVisibility(View.VISIBLE);
-            holder.tvTimestampDay.setText(note.getDate().substring(8, 10));
-            holder.tvTimestampMonth.setText(note.getDate().substring(5, 7));
-            holder.tvTimestampYear.setText(note.getDate().substring(0, 4));
+            holder.tvTimestampDay.setText(note.getNoteDate().substring(8, 10));
+            holder.tvTimestampMonth.setText(note.getNoteDate().substring(5, 7));
+            holder.tvTimestampYear.setText(note.getNoteDate().substring(0, 4));
         }
-        mPreviousDate = note.getDate();
-        holder.tvTitle.setText(note.getTitle());
-        holder.tvContent.setText(note.getContent());
-        holder.ltNoteItem.setOnClickListener(v -> Toast.makeText(mContext, "[Click]: " + note.getTitle(), Toast.LENGTH_SHORT).show());
+        mPreviousDate = note.getNoteDate();
+        holder.tvTitle.setText(note.getNoteTitle());
+        holder.tvContent.setText(note.getNoteContent());
+        holder.ltNoteItem.setOnClickListener(v -> Toast.makeText(mContext, "[Click]: " + note.getNoteTitle(), Toast.LENGTH_SHORT).show());
     }
 
     private boolean isTimeTagHidePosition(int position) {
@@ -74,7 +74,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.NoteItemViewHo
         if (position == 0) {
             return false;
         } else {
-            return mNotes.get(position - 1).getDate().equals(mNotes.get(position).getDate());
+            return mNotes.get(position - 1).getNoteDate().equals(mNotes.get(position).getNoteDate());
         }
     }
 
