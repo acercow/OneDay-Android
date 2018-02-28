@@ -14,8 +14,7 @@ import android.widget.TextView;
 import com.acercow.oneday.BaseFragment;
 import com.acercow.oneday.R;
 import com.acercow.oneday.data.Note;
-import com.acercow.oneday.data.NotesDataSource;
-import com.acercow.oneday.note.edit.EditNoteActivity;
+import com.acercow.oneday.note.preview.PreviewNoteActivity;
 import com.acercow.oneday.utils.ActivityUtils;
 
 import java.util.ArrayList;
@@ -23,18 +22,9 @@ import java.util.List;
 
 
 public class TimelineFragment extends BaseFragment implements TimelineContract.View {
-
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     private TimelineContract.Presenter mPresenter;
     private OnFragmentInteractionListener mListener;
     private RecyclerView lytNote;
-    private NotesDataSource notesDataSource;
     private TimelineAdapter mTimeLineAdapter;
     private ViewGroup lytEmptyView;
     private ImageView ivEmptyImage;
@@ -44,22 +34,13 @@ public class TimelineFragment extends BaseFragment implements TimelineContract.V
     }
 
 
-    public static TimelineFragment newInstance(String param1, String param2) {
-        TimelineFragment fragment = new TimelineFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    public static TimelineFragment newInstance() {
+        return new TimelineFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -140,10 +121,11 @@ public class TimelineFragment extends BaseFragment implements TimelineContract.V
 
     @Override
     public void showNotes(List<Note> notes) {
-        mTimeLineAdapter.notifyDataSetChanged();
         lytEmptyView.setVisibility(View.GONE);
         lytNote.setVisibility(View.VISIBLE);
-    }
+        mTimeLineAdapter.setData(notes);
+        mTimeLineAdapter.notifyDataSetChanged();
+}
 
     @Override
     public void showEmptyView() {
@@ -156,9 +138,9 @@ public class TimelineFragment extends BaseFragment implements TimelineContract.V
         Bundle bundle = new Bundle();
         if (note != null) {
             bundle.putSerializable("note_GUID", note);
-            ActivityUtils.startActivity(getActivity(), EditNoteActivity.class, bundle);
+            ActivityUtils.startActivity(getActivity(), PreviewNoteActivity.class, bundle);
         } else {
-            ActivityUtils.startActivity(getActivity(), EditNoteActivity.class);
+            ActivityUtils.startActivity(getActivity(), PreviewNoteActivity.class);
         }
     }
 

@@ -28,7 +28,11 @@
         <activity
             android:name=".wizard.WizardActivity"
             android:theme="@style/AppTheme.Translucent" />
-        <activity android:name=".note.edit.EditNoteActivity"></activity>
+        <activity android:name=".note.preview.PreviewNoteActivity" />
+        <activity
+            android:name=".note.edit.EditNoteActivity"
+            android:label="@string/title_activity_edit_note"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
