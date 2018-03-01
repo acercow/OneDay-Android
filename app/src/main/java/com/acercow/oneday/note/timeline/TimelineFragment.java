@@ -14,11 +14,13 @@ import android.widget.TextView;
 import com.acercow.oneday.BaseFragment;
 import com.acercow.oneday.R;
 import com.acercow.oneday.data.Note;
-import com.acercow.oneday.note.preview.PreviewNoteActivity;
+import com.acercow.oneday.note.edit.EditNoteActivity;
 import com.acercow.oneday.utils.ActivityUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.acercow.oneday.note.edit.EditNoteActivity.EXTRA_NOTE;
 
 
 public class TimelineFragment extends BaseFragment implements TimelineContract.View {
@@ -137,10 +139,10 @@ public class TimelineFragment extends BaseFragment implements TimelineContract.V
     public void showNoteDetail(Note note) {
         Bundle bundle = new Bundle();
         if (note != null) {
-            bundle.putSerializable("note_GUID", note);
-            ActivityUtils.startActivity(getActivity(), PreviewNoteActivity.class, bundle);
+            bundle.putSerializable(EXTRA_NOTE, note);
+            ActivityUtils.startActivity(getActivity(), EditNoteActivity.class, bundle);
         } else {
-            ActivityUtils.startActivity(getActivity(), PreviewNoteActivity.class);
+            ActivityUtils.startActivity(getActivity(), EditNoteActivity.class);
         }
     }
 

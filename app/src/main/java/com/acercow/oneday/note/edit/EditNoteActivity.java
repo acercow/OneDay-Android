@@ -23,7 +23,9 @@ public class EditNoteActivity extends BaseActivity {
 
     @Override
     public void initParms(Bundle parms) {
-        mNote = (Note) parms.getSerializable(EXTRA_NOTE);
+        if (parms != null) {
+            mNote = (Note) parms.getSerializable(EXTRA_NOTE);
+        }
     }
 
     @Override

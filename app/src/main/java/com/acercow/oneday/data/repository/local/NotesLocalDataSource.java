@@ -48,14 +48,14 @@ public class NotesLocalDataSource implements NotesDataSource {
 
     @Override
     public void saveNote(@NonNull Note note) {
-        Completable.fromAction(() -> mDatabase.noteDao().insertAll(note))
+        Completable.fromAction(() -> mDatabase.noteDao().insertNote(note))
                 .subscribeOn(Schedulers.io())
                 .subscribe();
     }
 
     @Override
     public void updateNote(@NonNull Note note) {
-        Completable.fromAction(() -> mDatabase.noteDao().updateNotes(note))
+        Completable.fromAction(() -> mDatabase.noteDao().updateNote(note))
                 .subscribeOn(Schedulers.io())
                 .subscribe();
     }

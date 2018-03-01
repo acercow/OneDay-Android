@@ -228,5 +228,4 @@ public class Note implements Serializable {
         return result;
     }
 
-
 }

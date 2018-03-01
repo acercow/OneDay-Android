@@ -2,12 +2,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
     tools:context="com.acercow.oneday.note.edit.EditNoteFragment">
 
     <EditText
-        android:id="@+id/note_edit_text"
+        android:id="@+id/note_edit_title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorGrey" />
+        android:layout_height="wrap_content"
+        android:hint="@string/note_edit_title_hint"
+        android:lines="1" />
+
+    <EditText
+        android:id="@+id/note_edit_content"
+        android:layout_below="@+id/note_edit_title"
+        android:layout_marginTop="8dp"
+        android:hint="@string/note_edit_content_hint"
+        android:background="@android:color/transparent"
+        android:gravity="top"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </RelativeLayout>

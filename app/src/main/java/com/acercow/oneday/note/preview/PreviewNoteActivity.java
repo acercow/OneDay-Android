@@ -45,8 +45,8 @@ public class PreviewNoteActivity extends BaseActivity {
 
     @Override
     public void initView(View view) {
-        wvNote = findViewById(R.id.note_web_view);
-        etNote = findViewById(R.id.note_edit_text);
+//        wvNote = findViewById(R.id.note_web_view);
+//        etNote = findViewById(R.id.note_edit_text);
         WebSettings webSettings = wvNote.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setUseWideViewPort(true);

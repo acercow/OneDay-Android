@@ -19,5 +19,7 @@
         <item>Lorem ipsum dolor sit amet, consectetur adipiscing elit ru iunition luopium ium dudobse biasihgt.</item>
     </string-array>
     <string name="title_activity_edit_note">EditNoteActivity</string>
+    <string name="note_edit_title_hint">Title</string>
+    <string name="note_edit_content_hint">Content</string>
 
 </resources>

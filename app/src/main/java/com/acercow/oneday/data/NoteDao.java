@@ -28,7 +28,7 @@ public interface NoteDao {
     Flowable<List<Note>> queryItemByWeather(int weather);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(Note item);
+    void insertNote(Note item);
 
     @Delete
     void deleteNotes(Note... items);
@@ -37,5 +37,5 @@ public interface NoteDao {
     void deleteAll();
 
     @Update
-    void updateNotes(Note item);
+    void updateNote(Note item);
 }

@@ -13,7 +13,7 @@ import android.view.View;
 
 import com.acercow.androidlib.activity.BaseActivity;
 import com.acercow.oneday.R;
-import com.acercow.oneday.note.preview.PreviewNoteActivity;
+import com.acercow.oneday.note.edit.EditNoteActivity;
 import com.acercow.oneday.note.feed.FeedFragment;
 import com.acercow.oneday.note.media.MediaFlowFragment;
 import com.acercow.oneday.note.timeline.TimelineFragment;
@@ -79,7 +79,7 @@ public class HomeActivity extends BaseActivity implements HomeContract.View {
             case R.id.fab:
 //                Snackbar.make(v, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
-                ActivityUtils.startActivity(this, PreviewNoteActivity.class);
+                ActivityUtils.startActivity(this, EditNoteActivity.class);
                 break;
         }
 

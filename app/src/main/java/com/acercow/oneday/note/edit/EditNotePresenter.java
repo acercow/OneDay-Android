@@ -2,7 +2,13 @@ package com.acercow.oneday.note.edit;
 
 import android.text.TextUtils;
 
+import com.acercow.oneday.bean.DocumentType;
+import com.acercow.oneday.bean.SyncStatus;
+import com.acercow.oneday.data.Note;
 import com.acercow.oneday.data.NotesDataSource;
+import com.acercow.oneday.utils.DateUtils;
+
+import java.util.UUID;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -13,6 +19,7 @@ import io.reactivex.disposables.CompositeDisposable;
 
 public class EditNotePresenter implements EditNoteContract.Presenter {
     private String mNoteId;
+    private Note mNote;
     private EditNoteContract.View mEditNoteView;
     private NotesDataSource mDataSource;
     private CompositeDisposable mCompositeDisposable;
@@ -26,9 +33,7 @@ public class EditNotePresenter implements EditNoteContract.Presenter {
 
     @Override
     public void subscribe() {
-        if (isEditNote()) {
-            populateNote(mNoteId);
-        }
+        populateNote(mNoteId);
     }
 
     @Override
@@ -65,20 +70,43 @@ public class EditNotePresenter implements EditNoteContract.Presenter {
                             if (item != null) {
                                 mEditNoteView.showNoteInEditor(item);
                             } else {
-                                mEditNoteView.showErr();
+                                mEditNoteView.showEmptyError();
                             }
-                        }));
+                        }, throwable -> mEditNoteView.showEmptyError()));
     }
 
 
     @Override
-        public void save(String title, String content, int weather, int color, int emotion) {
+    public void save(String title, String content, int weather, int color, int emotion) {
+        String date = DateUtils.getFormatDate();
+        if (mNote == null) { // 首次创建
+            mNote = new Note();
+            mNoteId = UUID.randomUUID().toString();
+            mNote.setNoteGUID(mNoteId);
+            mNote.setNoteReadCount(0);
+            mNote.setCreatedDate(date);
+            mNote.setSyncStatus(SyncStatus.LOCAL_ADDED);
+            mNote.setNoteType(DocumentType.NOTE);
+        } else {
+            mNote.setSyncStatus(SyncStatus.LOCAL_MODIFIED);
+        }
+        mNote.setNoteTitle(title.trim());
+        mNote.setNoteContent(content.trim());
+        mNote.setNoteWeather(weather == -1 ? 0 : weather);
+        mNote.setNoteColor(color == -1 ? 0 : color);
+        mNote.setNoteEmotion(emotion == -1 ? 0 : emotion);
 
+        // TODO 日记日期
+        mNote.setModifiedDate(date);
+        mNote.setNoteAbstract(content.length() > 20 ? content.substring(0, 20) : content);
+        mNote.setNoteDate(date);
+
+        mDataSource.saveNote(mNote);
     }
 
     @Override
     public void discard() {
-
+        mEditNoteView.toPreviewNoteActivity();
     }
 
     @Override
