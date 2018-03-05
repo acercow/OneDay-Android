@@ -4,29 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/noteBackgroundColor"
     tools:context="com.acercow.oneday.note.edit.EditNoteActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.NoActionBar.AppBarOverlay">
+        android:background="@android:color/transparent"
+        android:theme="@style/AppTheme.NoActionBar.AppBarOverlay"
+        app:elevation="0dp">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/edit_note_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            app:elevation="0dp"
+            app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.NoActionBar.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
 
-    <FrameLayout
-        android:id="@+id/edit_note_container"
-        android:layout_marginTop="?attr/actionBarSize"
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/edit_note_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </android.support.v4.widget.NestedScrollView>
 
-    </FrameLayout>
+    </android.support.design.widget.CoordinatorLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_save_note"
@@ -34,6 +43,53 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
+        android:visibility="gone"
         app:srcCompat="@android:drawable/ic_menu_save" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="bottom"
+        android:background="@color/colorGrey">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/note_format_bold"
+                style="@style/NoteFormatButton"
+                android:src="@drawable/ic_format_bold_black_48dp"/>
+            <ImageView
+                android:id="@+id/note_format_italic"
+                style="@style/NoteFormatButton"
+                android:src="@drawable/ic_format_italic_black_48dp"/>
+            <ImageView
+                android:id="@+id/note_format_underlined"
+                style="@style/NoteFormatButton"
+                android:src="@drawable/ic_format_underlined_black_48dp"/>
+            <ImageView
+                android:id="@+id/note_format_strikethrough"
+                style="@style/NoteFormatButton"
+                android:src="@drawable/ic_format_strikethrough_black_48dp"/>
+            <ImageView
+                android:id="@+id/note_format_clear"
+                style="@style/NoteFormatButton"
+                android:src="@drawable/ic_format_clear_black_48dp"/>
+            <ImageView
+                android:id="@+id/note_format_list_bulleted"
+                style="@style/NoteFormatButton"
+                android:src="@drawable/ic_format_list_bulleted_black_48dp"/>
+            <ImageView
+                android:id="@+id/note_format_list_numbered"
+                style="@style/NoteFormatButton"
+                android:src="@drawable/ic_format_list_numbered_black_48dp"/>
+            <ImageView
+                android:id="@+id/note_format_quote"
+                style="@style/NoteFormatButton"
+                android:src="@drawable/ic_format_quote_black_48dp"/>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </android.support.design.widget.CoordinatorLayout>

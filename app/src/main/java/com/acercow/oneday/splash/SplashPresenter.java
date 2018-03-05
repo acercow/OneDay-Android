@@ -43,7 +43,7 @@ public class SplashPresenter implements SplashContract.Presenter {
         mTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                if (mCountdown < 0) {
+                if (mCountdown == -1) {
                     mTimer.cancel();
                     mSplashView.toNextActivity();
                 } else {

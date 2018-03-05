@@ -11,4 +11,10 @@
     <color name="colorWizard2">#d2491e</color>
     <color name="colorGrey">#FFEFEFEF</color>
     <color name="colorBlue">#0090f1</color>
+
+    <!--Note-->
+    <color name="noteTextColor">#686868</color>
+    <color name="noteBackgroundColor">#FFFFFF</color>
+    <color name="toobarMenuIconColor">#686868</color>
+
 </resources>

@@ -10,7 +10,6 @@
 
     <EditText
         android:id="@+id/note_editor"
-        android:background="@color/colorGrey"
         android:gravity="top"
         android:inputType="textMultiLine"
         android:layout_width="match_parent"

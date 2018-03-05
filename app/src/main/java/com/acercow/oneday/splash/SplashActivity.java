@@ -42,7 +42,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     }
 
     @Override
-    public void doBusiness(Context mContext) {
+    public void doBusiness(Context mContext, Bundle savedInstanceState) {
     }
 
     @Override
@@ -58,7 +58,7 @@ public class SplashActivity extends BaseActivity implements SplashContract.View 
     protected void onStart() {
         super.onStart();
         mPresenter.subscribe();
-        mPresenter.startCountdown(3);
+        mPresenter.startCountdown(1);
     }
 
     @Override

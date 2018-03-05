@@ -13,8 +13,9 @@ public interface EditNoteContract {
     interface Presenter extends BasePresenter {
         void search();
         void createNote();
-        void share(String noteId);
+        void share();
         void preview();
+        void info();
         void populateNote(String noteId);
         boolean isDataMissing();
         void save(String title, String content, int weather, int color, int emotion);
@@ -36,6 +37,7 @@ public interface EditNoteContract {
         void previousKeyword();
         void showShareDialog();
         void showEmptyError();
+        void showInfoDialog();
         void showExportMenu();
     }
 }

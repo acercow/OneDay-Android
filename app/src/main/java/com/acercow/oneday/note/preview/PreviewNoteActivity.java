@@ -36,7 +36,7 @@ public class PreviewNoteActivity extends BaseActivity {
     }
 
     @Override
-    public void doBusiness(Context mContext) {
+    public void doBusiness(Context mContext, Bundle savedInstanceState) {
         PreviewNoteFragment fragment = PreviewNoteFragment.newInstance(mNoteId);
         ActivityUtils.addFragment(this, fragment, R.id.preview_note_container);
     }

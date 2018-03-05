@@ -72,7 +72,7 @@ public class WizardActivity extends BaseActivity {
     }
 
     @Override
-    public void doBusiness(Context mContext) {
+    public void doBusiness(Context mContext, Bundle savedInstanceState) {
 
         TypedArray typedArray = getResources().obtainTypedArray(R.array.wizard_images);
         wizardImages = new int[typedArray.length()];

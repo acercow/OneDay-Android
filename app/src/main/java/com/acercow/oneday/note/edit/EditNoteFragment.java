@@ -8,14 +8,17 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.acercow.oneday.BaseFragment;
 import com.acercow.oneday.R;
-import com.acercow.oneday.data.Injection;
 import com.acercow.oneday.data.Note;
 
 /**
@@ -23,11 +26,13 @@ import com.acercow.oneday.data.Note;
  */
 public class EditNoteFragment extends BaseFragment implements EditNoteContract.View {
 
-    public static final String SHOULD_LOAD_DATA_FROM_REPO_KEY = "SHOULD_LOAD_DATA_FROM_REPO_KEY";
     public static final String ARG_NOTE_ID = "arg_note_id";
     private EditNoteContract.Presenter mPresenter;
     private EditText etNoteTitle;
     private EditText etNoteContent;
+    private TextView tvNoteHeaderDate;
+    private TextView tvNoteHeaderWeather;
+    private TextView tvNoteHeaderEmotion;
 
     public EditNoteFragment() {
         // Required empty public constructor
@@ -43,6 +48,7 @@ public class EditNoteFragment extends BaseFragment implements EditNoteContract.V
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
     }
 
@@ -62,6 +68,9 @@ public class EditNoteFragment extends BaseFragment implements EditNoteContract.V
     public void initView(View view) {
         etNoteTitle = view.findViewById(R.id.note_edit_title);
         etNoteContent = view.findViewById(R.id.note_edit_content);
+        tvNoteHeaderDate = view.findViewById(R.id.note_header_date);
+        tvNoteHeaderWeather = view.findViewById(R.id.note_header_weather);
+        tvNoteHeaderEmotion = view.findViewById(R.id.note_header_emotion);
     }
 
     @Override
@@ -71,24 +80,49 @@ public class EditNoteFragment extends BaseFragment implements EditNoteContract.V
         if (bundle != null) {
             noteId = bundle.getString(ARG_NOTE_ID);
         }
-        boolean shouldLoadDataFromRepo = true;
-        if (savedInstanceState != null) {
-            shouldLoadDataFromRepo = savedInstanceState.getBoolean(SHOULD_LOAD_DATA_FROM_REPO_KEY);
-        }
-        new EditNotePresenter(noteId, this, Injection.getNotesDataRepository(mContext), shouldLoadDataFromRepo);
+
         mPresenter.populateNote(noteId);
     }
 
     @Override
     public void widgetClick(View v) {
         switch (v.getId()) {
-            case R.id.fab_save_note:
+            case R.id.action_note_save:
+
+                break;
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_edit_note, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                getActivity().finish();
+                break;
+
+            case R.id.action_note_share:
+                mPresenter.share();
+                break;
+
+            case R.id.action_note_info:
+                mPresenter.info();
+                break;
+
+            case R.id.action_note_save:
                 mPresenter.save(etNoteTitle.getText().toString(), etNoteContent.getText().toString(), -1, -1, -1);
                 getActivity().setResult(Activity.RESULT_OK);
                 getActivity().finish();
                 break;
         }
+        return super.onOptionsItemSelected(item);
     }
+
 
     @Override
     public void onResume() {
@@ -110,12 +144,6 @@ public class EditNoteFragment extends BaseFragment implements EditNoteContract.V
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putBoolean(SHOULD_LOAD_DATA_FROM_REPO_KEY, mPresenter.isDataMissing());
-    }
-
-    @Override
     public void setPresenter(EditNoteContract.Presenter presenter) {
         this.mPresenter = presenter;
     }
@@ -125,6 +153,7 @@ public class EditNoteFragment extends BaseFragment implements EditNoteContract.V
         if (note != null) {
             etNoteTitle.setText(note.getNoteTitle());
             etNoteContent.setText(note.getNoteContent());
+            tvNoteHeaderDate.setText(note.getNoteDate().substring(0, 10));
         }
     }
 
@@ -175,6 +204,11 @@ public class EditNoteFragment extends BaseFragment implements EditNoteContract.V
 
     @Override
     public void showEmptyError() {
+
+    }
+
+    @Override
+    public void showInfoDialog() {
 
     }
 

@@ -18,7 +18,7 @@ import io.reactivex.Flowable;
 @Dao
 public interface NoteDao {
 
-    @Query("SELECT * FROM notes")
+    @Query("SELECT * FROM notes ORDER BY note_date DESC")
     Flowable<List<Note>> queryAll();
 
     @Query("SELECT * FROM notes WHERE note_guid = :id")

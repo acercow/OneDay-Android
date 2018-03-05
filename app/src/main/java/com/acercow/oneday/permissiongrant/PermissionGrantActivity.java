@@ -59,7 +59,7 @@ public class PermissionGrantActivity extends BaseActivity implements PermissionG
     }
 
     @Override
-    public void doBusiness(Context mContext) {
+    public void doBusiness(Context mContext, Bundle savedInstanceState) {
 
     }
 

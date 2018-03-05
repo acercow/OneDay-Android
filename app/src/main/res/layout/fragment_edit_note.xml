@@ -1,26 +1,98 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
+    android:orientation="vertical"
     tools:context="com.acercow.oneday.note.edit.EditNoteFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/note_header_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2017-10-13"
+                android:textColor="@android:color/darker_gray" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/note_header_weather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="多云"
+                android:textColor="@android:color/darker_gray" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical|right"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/note_header_emotion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="生气"
+                android:textColor="@android:color/darker_gray" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:background="@color/colorGrey"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp" />
 
     <EditText
         android:id="@+id/note_edit_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
         android:hint="@string/note_edit_title_hint"
-        android:lines="1" />
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:ellipsize="end"
+        android:text=""
+        android:background="@android:color/transparent"
+        android:maxLines="2" />
 
     <EditText
         android:id="@+id/note_edit_content"
-        android:layout_below="@+id/note_edit_title"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textColor="@color/noteTextColor"
         android:layout_marginTop="8dp"
-        android:hint="@string/note_edit_content_hint"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:lineSpacingExtra="6dp"
+        android:textSize="16sp"
+        android:text=""
+        android:lineSpacingMultiplier="1.5"
         android:background="@android:color/transparent"
         android:gravity="top"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:hint="@string/note_edit_content_hint" />
 
-</RelativeLayout>
+</LinearLayout>

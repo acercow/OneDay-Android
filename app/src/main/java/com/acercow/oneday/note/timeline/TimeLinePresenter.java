@@ -53,6 +53,7 @@ public class TimeLinePresenter implements TimelineContract.Presenter {
     public void listNotes() {
         notesDataSource.getNotes()
                 .observeOn(AndroidSchedulers.mainThread())
+//                .doOnNext(items -> Collections.sort(items, (o1, o2) -> o1.getNoteDate().compareTo(o2.getNoteDate())))
                 .subscribe(items -> {
                     if (items == null || items.size() == 0) {
                         view.showEmptyView();

@@ -58,7 +58,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 //                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 //            }
         initView(mContextView);
-        doBusiness(this);
+        doBusiness(this, savedInstanceState);
 
     }
 
@@ -107,7 +107,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      *
      * @param mContext
      */
-    public abstract void doBusiness(Context mContext);
+    public abstract void doBusiness(Context mContext, Bundle savedInstanceState);
 
     /** View点击 **/
     public abstract void onSingleClick(View v);

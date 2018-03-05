@@ -57,12 +57,18 @@ public class EditNotePresenter implements EditNoteContract.Presenter {
     }
 
     @Override
-    public void share(String noteId) {
+    public void share() {
+
+    }
+
+
+    @Override
+    public void preview() {
 
     }
 
     @Override
-    public void preview() {
+    public void info() {
 
     }
 
