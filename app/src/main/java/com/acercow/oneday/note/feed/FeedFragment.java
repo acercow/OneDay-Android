@@ -75,7 +75,7 @@ public class FeedFragment extends BaseFragment {
     }
 
     @Override
-    public void doBusiness(Context mContext) {
+    public void doBusiness(Context mContext, Bundle savedInstanceState) {
 //        List<Note> mockNotes = MockNoteGenerator.getMockNotes(mContext);
 //        Collections.sort(mockNotes, (o1, o2) -> o1.getNoteDate().compareTo(o2.getNoteDate()));
 //        FeedAdapter adapter = new FeedAdapter(getContext());

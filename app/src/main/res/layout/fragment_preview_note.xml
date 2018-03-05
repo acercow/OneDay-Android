@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    tools:context="com.acercow.oneday.note.preview.PreviewNoteActivity">
+
+    <TextView
+        android:id="@+id/preview_note_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:gravity="center_vertical"
+        android:textStyle="bold"
+        android:lines="1"/>
+
+    <WebView
+        android:id="@+id/preview_note_content"
+        android:layout_below="@id/preview_note_title"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </WebView>
+</RelativeLayout>

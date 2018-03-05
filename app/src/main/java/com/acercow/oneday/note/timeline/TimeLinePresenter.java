@@ -36,12 +36,12 @@ public class TimeLinePresenter implements TimelineContract.Presenter {
 
     @Override
     public void addNote() {
-        view.showNoteDetail(null);
+        view.toEditNoteActivity(null);
     }
 
     @Override
-    public void editNote(Note note) {
-        view.showNoteDetail(note);
+    public void previewNote(String noteId) {
+        view.toPreviewNoteActivity(noteId);
     }
 
     @Override

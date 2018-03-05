@@ -38,9 +38,6 @@ public class SplashPresenter implements SplashContract.Presenter {
 
     @Override
     public void startCountdown(int seconds) {
-
-
-
         mCountdown = seconds;
         mTimer = new Timer();
         mTimer.schedule(new TimerTask() {

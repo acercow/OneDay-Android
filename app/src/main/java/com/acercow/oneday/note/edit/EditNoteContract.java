@@ -16,6 +16,7 @@ public interface EditNoteContract {
         void share(String noteId);
         void preview();
         void populateNote(String noteId);
+        boolean isDataMissing();
         void save(String title, String content, int weather, int color, int emotion);
         void discard();
         void undo();

@@ -20,25 +20,30 @@ import io.reactivex.disposables.CompositeDisposable;
 public class EditNotePresenter implements EditNoteContract.Presenter {
     private String mNoteId;
     private Note mNote;
+    private boolean mIsDataMissing;
     private EditNoteContract.View mEditNoteView;
     private NotesDataSource mDataSource;
     private CompositeDisposable mCompositeDisposable;
 
-    public EditNotePresenter(String noteId, EditNoteContract.View view, NotesDataSource dataSource) {
+    public EditNotePresenter(String noteId, EditNoteContract.View view, NotesDataSource dataSource, boolean shouldLoadDataFromRepo) {
         this.mNoteId = noteId;
         this.mEditNoteView = view;
         this.mDataSource = dataSource;
+        this.mIsDataMissing = shouldLoadDataFromRepo;
         this.mCompositeDisposable = new CompositeDisposable();
+        mEditNoteView.setPresenter(this);
     }
 
     @Override
     public void subscribe() {
-        populateNote(mNoteId);
+        if (mIsDataMissing) {
+            populateNote(mNoteId);
+        }
     }
 
     @Override
     public void unSubscribe() {
-
+        mCompositeDisposable.clear();
     }
 
     @Override
@@ -68,6 +73,8 @@ public class EditNotePresenter implements EditNoteContract.Presenter {
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(item -> {
                             if (item != null) {
+                                mIsDataMissing = false;
+                                mNote = item;
                                 mEditNoteView.showNoteInEditor(item);
                             } else {
                                 mEditNoteView.showEmptyError();
@@ -75,9 +82,17 @@ public class EditNotePresenter implements EditNoteContract.Presenter {
                         }, throwable -> mEditNoteView.showEmptyError()));
     }
 
+    @Override
+    public boolean isDataMissing() {
+        return mIsDataMissing;
+    }
+
 
     @Override
     public void save(String title, String content, int weather, int color, int emotion) {
+        if (TextUtils.isEmpty(title)) {
+            title = "未标题";
+        }
         String date = DateUtils.getFormatDate();
         if (mNote == null) { // 首次创建
             mNote = new Note();
@@ -85,6 +100,7 @@ public class EditNotePresenter implements EditNoteContract.Presenter {
             mNote.setNoteGUID(mNoteId);
             mNote.setNoteReadCount(0);
             mNote.setCreatedDate(date);
+            mNote.setNoteDate(date);
             mNote.setSyncStatus(SyncStatus.LOCAL_ADDED);
             mNote.setNoteType(DocumentType.NOTE);
         } else {
@@ -99,7 +115,6 @@ public class EditNotePresenter implements EditNoteContract.Presenter {
         // TODO 日记日期
         mNote.setModifiedDate(date);
         mNote.setNoteAbstract(content.length() > 20 ? content.substring(0, 20) : content);
-        mNote.setNoteDate(date);
 
         mDataSource.saveNote(mNote);
     }

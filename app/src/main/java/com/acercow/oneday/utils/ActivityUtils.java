@@ -26,6 +26,22 @@ public class ActivityUtils {
         fromActivity.startActivity(intent);
     }
 
+    public static void startActivityForResult(Fragment fragment, Class<?> toActivity, Bundle bundle, int requestCode) {
+        Intent intent = new Intent(fragment.getContext(), toActivity);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        fragment.startActivityForResult(intent, requestCode);
+    }
+
+    public static void startActivityForResult(FragmentActivity fromActivity, Class<?> toActivity, Bundle bundle, int requestCode) {
+        Intent intent = new Intent(fromActivity, toActivity);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        fromActivity.startActivityForResult(intent, requestCode);
+    }
+
     public static void addFragment(FragmentActivity activity, Fragment fragment, int containerId) {
         FragmentManager fm = activity.getSupportFragmentManager();
         fm.beginTransaction().add(containerId, fragment).commit();

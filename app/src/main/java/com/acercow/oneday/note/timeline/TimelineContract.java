@@ -12,20 +12,22 @@ import java.util.List;
 
 public interface TimelineContract {
 
+    interface Presenter extends BasePresenter {
+        void addNote();
+        void previewNote(String noteId);
+        void deleteNotes(Note... notes);
+        void listNotes();
+        void result(int requestCode, int resultCode);
+    }
+
     interface View extends BaseView<Presenter> {
         void showNotes(List<Note> notes);
         void showEmptyView();
-        void showNoteDetail(Note note);
+        void toEditNoteActivity(String noteId);
+        void toPreviewNoteActivity(String noteId);
         void showNoteDeleted();
         void showNoteSaved();
 
     }
 
-    interface Presenter extends BasePresenter {
-        void addNote();
-        void editNote(Note note);
-        void deleteNotes(Note... notes);
-        void listNotes();
-        void result(int requestCode, int resultCode);
-    }
 }

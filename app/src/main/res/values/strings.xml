@@ -21,5 +21,6 @@
     <string name="title_activity_edit_note">EditNoteActivity</string>
     <string name="note_edit_title_hint">Title</string>
     <string name="note_edit_content_hint">Content</string>
+    <string name="title_activity_main">MainActivity</string>
 
 </resources>

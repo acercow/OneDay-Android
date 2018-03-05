@@ -29,7 +29,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
                              Bundle savedInstanceState) {
         mContextView = inflater.inflate(bindLayout(), container, false);
         initView(mContextView);
-        doBusiness(getActivity());
+        doBusiness(getActivity(), savedInstanceState);
         return mContextView;
     }
 
@@ -52,7 +52,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
      *
      * @param mContext
      */
-    public abstract void doBusiness(Context mContext);
+    public abstract void doBusiness(Context mContext, Bundle savedInstanceState);
 
     /** View点击 **/
     public abstract void widgetClick(View v);

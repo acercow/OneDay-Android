@@ -15,12 +15,13 @@ import com.acercow.oneday.BaseFragment;
 import com.acercow.oneday.R;
 import com.acercow.oneday.data.Note;
 import com.acercow.oneday.note.edit.EditNoteActivity;
+import com.acercow.oneday.note.preview.PreviewNoteActivity;
 import com.acercow.oneday.utils.ActivityUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.acercow.oneday.note.edit.EditNoteActivity.EXTRA_NOTE;
+import static com.acercow.oneday.note.edit.EditNoteActivity.EXTRA_NOTE_ID;
 
 
 public class TimelineFragment extends BaseFragment implements TimelineContract.View {
@@ -65,7 +66,7 @@ public class TimelineFragment extends BaseFragment implements TimelineContract.V
     }
 
     @Override
-    public void doBusiness(Context mContext) {
+    public void doBusiness(Context mContext, Bundle savedInstanceState) {
 //        List<Note> mockNotes = MockNoteGenerator.getMockNotes(mContext);
 //        Collections.sort(mockNotes, (o1, o2) -> o1.getNoteDate().compareTo(o2.getNoteDate()));
 
@@ -136,14 +137,15 @@ public class TimelineFragment extends BaseFragment implements TimelineContract.V
     }
 
     @Override
-    public void showNoteDetail(Note note) {
+    public void toEditNoteActivity(String noteId) {
+        ActivityUtils.startActivity(getActivity(), EditNoteActivity.class);
+    }
+
+    @Override
+    public void toPreviewNoteActivity(String noteId) {
         Bundle bundle = new Bundle();
-        if (note != null) {
-            bundle.putSerializable(EXTRA_NOTE, note);
-            ActivityUtils.startActivity(getActivity(), EditNoteActivity.class, bundle);
-        } else {
-            ActivityUtils.startActivity(getActivity(), EditNoteActivity.class);
-        }
+        bundle.putString(EXTRA_NOTE_ID, noteId);
+        ActivityUtils.startActivity(getActivity(), PreviewNoteActivity.class, bundle);
     }
 
     @Override
@@ -212,7 +214,7 @@ public class TimelineFragment extends BaseFragment implements TimelineContract.V
 //        holder.ltNoteItem.setOnClickListener(v -> Toast.makeText(mContext, "[Click]: " + note.getTitle(), Toast.LENGTH_SHORT).show());
 
             holder.ltNoteItem.setOnClickListener(v -> {
-                mPresenter.editNote(note);
+                mPresenter.previewNote(note.getNoteGUID());
             });
         }
 

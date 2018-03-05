@@ -1,8 +1,11 @@
 package com.acercow.oneday.note.edit;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,8 +23,8 @@ import com.acercow.oneday.data.Note;
  */
 public class EditNoteFragment extends BaseFragment implements EditNoteContract.View {
 
-
-    public static final String ARG_NOTE = "arg_note";
+    public static final String SHOULD_LOAD_DATA_FROM_REPO_KEY = "SHOULD_LOAD_DATA_FROM_REPO_KEY";
+    public static final String ARG_NOTE_ID = "arg_note_id";
     private EditNoteContract.Presenter mPresenter;
     private EditText etNoteTitle;
     private EditText etNoteContent;
@@ -30,10 +33,10 @@ public class EditNoteFragment extends BaseFragment implements EditNoteContract.V
         // Required empty public constructor
     }
 
-    public static EditNoteFragment newInstance(Note note) {
+    public static EditNoteFragment newInstance(String noteId) {
         EditNoteFragment fragment = new EditNoteFragment();
         Bundle bundle = new Bundle();
-        bundle.putSerializable(ARG_NOTE, note);
+        bundle.putString(ARG_NOTE_ID, noteId);
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -62,18 +65,29 @@ public class EditNoteFragment extends BaseFragment implements EditNoteContract.V
     }
 
     @Override
-    public void doBusiness(Context mContext) {
+    public void doBusiness(Context mContext, Bundle savedInstanceState) {
         Bundle bundle = getArguments();
         String noteId = "";
         if (bundle != null) {
-            noteId = bundle.getString(ARG_NOTE);
+            noteId = bundle.getString(ARG_NOTE_ID);
         }
-        mPresenter = new EditNotePresenter(noteId, this, Injection.getNotesDataRepository(mContext));
+        boolean shouldLoadDataFromRepo = true;
+        if (savedInstanceState != null) {
+            shouldLoadDataFromRepo = savedInstanceState.getBoolean(SHOULD_LOAD_DATA_FROM_REPO_KEY);
+        }
+        new EditNotePresenter(noteId, this, Injection.getNotesDataRepository(mContext), shouldLoadDataFromRepo);
+        mPresenter.populateNote(noteId);
     }
 
     @Override
     public void widgetClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.fab_save_note:
+                mPresenter.save(etNoteTitle.getText().toString(), etNoteContent.getText().toString(), -1, -1, -1);
+                getActivity().setResult(Activity.RESULT_OK);
+                getActivity().finish();
+                break;
+        }
     }
 
     @Override
@@ -83,9 +97,22 @@ public class EditNoteFragment extends BaseFragment implements EditNoteContract.V
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
-        mPresenter.save(etNoteTitle.getText().toString(), etNoteContent.getText().toString(), -1, -1, -1);
+    public void onPause() {
+        super.onPause();
+        mPresenter.unSubscribe();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        FloatingActionButton floatingActionButton = getActivity().findViewById(R.id.fab_save_note);
+        floatingActionButton.setOnClickListener(this);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(SHOULD_LOAD_DATA_FROM_REPO_KEY, mPresenter.isDataMissing());
     }
 
     @Override
