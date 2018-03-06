@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.ShareActionProvider;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 import com.acercow.oneday.BaseFragment;
 import com.acercow.oneday.R;
 import com.acercow.oneday.data.Note;
+import com.acercow.oneday.dialog.NoteInfoDialog;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -216,10 +218,25 @@ public class EditNoteFragment extends BaseFragment implements EditNoteContract.V
     @Override
     public void showInfoDialog() {
 
+            // DialogFragment.show() will take care of adding the fragment
+            // in a transaction.  We also want to remove any currently showing
+            // dialog, so make our own transaction and take care of that here.
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            Fragment prev = getFragmentManager().findFragmentByTag("dialog");
+            if (prev != null) {
+                ft.remove(prev);
+            }
+            ft.addToBackStack(null);
+
+            // Create and show the dialog.
+            NoteInfoDialog newFragment = new NoteInfoDialog();
+            newFragment.show(ft, "dialog");
     }
 
     @Override
     public void showExportMenu() {
 
     }
+
+
 }

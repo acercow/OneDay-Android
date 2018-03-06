@@ -73,7 +73,7 @@ public class EditNotePresenter implements EditNoteContract.Presenter {
 
     @Override
     public void info() {
-
+        mEditNoteView.showInfoDialog();
     }
 
     @Override

@@ -20,7 +20,6 @@ public class NoteInfoDialog extends AppCompatDialogFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        inflater.inflate(R.layout.dialog_note_info, container);
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return inflater.inflate(R.layout.dialog_note_info, container, false);
     }
 }
