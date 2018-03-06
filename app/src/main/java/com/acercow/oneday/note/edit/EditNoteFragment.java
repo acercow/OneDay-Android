@@ -3,10 +3,12 @@ package com.acercow.oneday.note.edit;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.ShareActionProvider;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -33,6 +35,7 @@ public class EditNoteFragment extends BaseFragment implements EditNoteContract.V
     private TextView tvNoteHeaderDate;
     private TextView tvNoteHeaderWeather;
     private TextView tvNoteHeaderEmotion;
+    private ShareActionProvider mShareActionProvider;
 
     public EditNoteFragment() {
         // Required empty public constructor
@@ -198,8 +201,11 @@ public class EditNoteFragment extends BaseFragment implements EditNoteContract.V
     }
 
     @Override
-    public void showShareDialog() {
-
+    public void showShareDialog(Intent shareIntent) {
+        shareIntent.putExtra(Intent.EXTRA_TITLE, etNoteTitle.getText().toString());
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, etNoteTitle.getText().toString());
+        shareIntent.putExtra(Intent.EXTRA_TEXT, etNoteContent.getText().toString());
+        startActivity(Intent.createChooser(shareIntent, getResources().getString(R.string.app_name)));
     }
 
     @Override

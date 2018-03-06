@@ -1,5 +1,6 @@
 package com.acercow.oneday.note.edit;
 
+import android.content.Intent;
 import android.text.TextUtils;
 
 import com.acercow.oneday.bean.DocumentType;
@@ -58,7 +59,10 @@ public class EditNotePresenter implements EditNoteContract.Presenter {
 
     @Override
     public void share() {
-
+        Intent shareIntent = new Intent();
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        mEditNoteView.showShareDialog(shareIntent);
     }
 
 

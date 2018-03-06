@@ -34,10 +34,6 @@
             android:label="@string/title_activity_edit_note"
             android:windowSoftInputMode="adjustResize"
             android:theme="@style/AppTheme.LightStatusBar" />
-        <activity
-            android:name=".note.preview.MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

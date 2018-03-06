@@ -1,5 +1,7 @@
 package com.acercow.oneday.note.edit;
 
+import android.content.Intent;
+
 import com.acercow.oneday.BasePresenter;
 import com.acercow.oneday.BaseView;
 import com.acercow.oneday.data.Note;
@@ -35,7 +37,7 @@ public interface EditNoteContract {
         void highlightKeyword(String key);
         void nextKeyword();
         void previousKeyword();
-        void showShareDialog();
+        void showShareDialog(Intent intent);
         void showEmptyError();
         void showInfoDialog();
         void showExportMenu();
