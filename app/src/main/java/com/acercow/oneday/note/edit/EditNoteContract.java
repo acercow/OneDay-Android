@@ -25,6 +25,7 @@ public interface EditNoteContract {
         void undo();
         void redo();
         void export();
+        boolean isCreateNote();
     }
 
     interface View extends BaseView<Presenter> {
@@ -39,7 +40,7 @@ public interface EditNoteContract {
         void previousKeyword();
         void showShareDialog(Intent intent);
         void showEmptyError();
-        void showInfoDialog();
+        void showInfoDialog(Note note);
         void showExportMenu();
     }
 }

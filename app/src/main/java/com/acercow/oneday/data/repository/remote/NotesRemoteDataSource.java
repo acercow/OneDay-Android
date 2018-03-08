@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Completable;
 import io.reactivex.Flowable;
 
 /**
@@ -54,26 +55,30 @@ public class NotesRemoteDataSource implements NotesDataSource {
     }
 
     @Override
-    public void saveNote(@NonNull Note note) {
+    public Completable saveNote(@NonNull Note note) {
         FAKE_REMOTE_DATA.put(note.getNoteGUID(), note);
+        return Completable.complete();
     }
 
     @Override
-    public void updateNote(@NonNull Note note) {
+    public Completable updateNote(@NonNull Note note) {
         FAKE_REMOTE_DATA.put(note.getNoteGUID(), note);
+        return Completable.complete();
     }
 
     @Override
-    public void deleteNotes(@NonNull Note... notes) {
+    public Completable deleteNotes(@NonNull Note... notes) {
         for (Note note : notes) {
             if (FAKE_REMOTE_DATA.containsKey(note.getNoteGUID())) {
                 FAKE_REMOTE_DATA.remove(note.getNoteGUID());
             }
         }
+        return Completable.complete();
     }
 
     @Override
-    public void deleteAll() {
+    public Completable deleteAll() {
         FAKE_REMOTE_DATA.clear();
+        return Completable.complete();
     }
 }

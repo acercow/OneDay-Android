@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
+import io.reactivex.Completable;
 import io.reactivex.Flowable;
 
 /**
@@ -14,8 +15,8 @@ public interface NotesDataSource {
     Flowable<List<Note>> getNotes();
     Flowable<Note> getNote(@NonNull String id);
 
-    void saveNote(@NonNull Note note);
-    void updateNote(@NonNull Note note);
-    void deleteNotes(@NonNull Note... notes);
-    void deleteAll();
+    Completable saveNote(@NonNull Note note);
+    Completable updateNote(@NonNull Note note);
+    Completable deleteNotes(@NonNull Note... notes);
+    Completable deleteAll();
 }

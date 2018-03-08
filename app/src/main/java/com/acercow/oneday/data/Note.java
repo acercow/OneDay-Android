@@ -53,6 +53,11 @@ public class Note implements Serializable {
     private int noteWeather;
     @ColumnInfo(name = "note_emotion")
     private int noteEmotion;
+    @ColumnInfo(name = "last_edit_device_type")
+    private int lastEditDeviceType;
+    @ColumnInfo(name = "last_edit_device_name")
+    private String lastEditDeviceName;
+
 
     public String getNoteGUID() {
         return noteGUID;
@@ -228,4 +233,19 @@ public class Note implements Serializable {
         return result;
     }
 
+    public int getLastEditDeviceType() {
+        return lastEditDeviceType;
+    }
+
+    public void setLastEditDeviceType(int lastEditDeviceType) {
+        this.lastEditDeviceType = lastEditDeviceType;
+    }
+
+    public String getLastEditDeviceName() {
+        return lastEditDeviceName;
+    }
+
+    public void setLastEditDeviceName(String lastEditDeviceName) {
+        this.lastEditDeviceName = lastEditDeviceName;
+    }
 }

@@ -26,6 +26,7 @@ public class PermissionGrantPresenter implements PermissionGrantContract.Present
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.CAMERA,
             Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.READ_PHONE_STATE,
             Manifest.permission.ACCESS_FINE_LOCATION};
 
     public PermissionGrantPresenter(PermissionGrantContract.View permissionGrantView) {
@@ -52,12 +53,16 @@ public class PermissionGrantPresenter implements PermissionGrantContract.Present
     private  boolean checkAndRequestPermissions(Context context) {
         int locationPermission = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION);
         int cameraPermission = ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA);
+        int readPhoneStatePermission = ContextCompat.checkSelfPermission(context, Manifest.permission.READ_PHONE_STATE);
         List<String> listPermissionsNeeded = new ArrayList<>();
         if (locationPermission != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION);
         }
         if (cameraPermission != PackageManager.PERMISSION_GRANTED) {
             listPermissionsNeeded.add(Manifest.permission.CAMERA);
+        }
+        if (readPhoneStatePermission != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.READ_PHONE_STATE);
         }
         if (!listPermissionsNeeded.isEmpty()) {
             ActivityCompat.requestPermissions((Activity)context, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), PermissionGrantActivity.REQUEST_ID_MULTIPLE_PERMISSIONS);

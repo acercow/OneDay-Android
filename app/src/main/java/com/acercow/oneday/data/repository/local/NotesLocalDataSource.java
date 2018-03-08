@@ -47,31 +47,27 @@ public class NotesLocalDataSource implements NotesDataSource {
     }
 
     @Override
-    public void saveNote(@NonNull Note note) {
-        Completable.fromAction(() -> mDatabase.noteDao().insertNote(note))
-                .subscribeOn(Schedulers.io())
-                .subscribe();
+    public Completable saveNote(@NonNull Note note) {
+        return Completable.fromAction(() -> mDatabase.noteDao().insertNote(note))
+                .subscribeOn(Schedulers.io());
     }
 
     @Override
-    public void updateNote(@NonNull Note note) {
-        Completable.fromAction(() -> mDatabase.noteDao().updateNote(note))
-                .subscribeOn(Schedulers.io())
-                .subscribe();
+    public Completable updateNote(@NonNull Note note) {
+        return Completable.fromAction(() -> mDatabase.noteDao().updateNote(note))
+                .subscribeOn(Schedulers.io());
     }
 
 
     @Override
-    public void deleteNotes(@NonNull Note... notes) {
-        Completable.fromAction(() -> mDatabase.noteDao().deleteNotes(notes))
-                .subscribeOn(Schedulers.io())
-                .subscribe();
+    public Completable deleteNotes(@NonNull Note... notes) {
+        return Completable.fromAction(() -> mDatabase.noteDao().deleteNotes(notes))
+                .subscribeOn(Schedulers.io());
     }
 
     @Override
-    public void deleteAll() {
-        Completable.fromAction(() -> mDatabase.noteDao().deleteAll())
-                .subscribeOn(Schedulers.io())
-                .subscribe();
+    public Completable deleteAll() {
+        return Completable.fromAction(() -> mDatabase.noteDao().deleteAll())
+                .subscribeOn(Schedulers.io());
     }
 }

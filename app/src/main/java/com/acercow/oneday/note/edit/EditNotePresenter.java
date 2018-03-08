@@ -3,8 +3,10 @@ package com.acercow.oneday.note.edit;
 import android.content.Intent;
 import android.text.TextUtils;
 
-import com.acercow.oneday.bean.DocumentType;
+import com.acercow.androidlib.utils.SystemUtils;
 import com.acercow.oneday.bean.SyncStatus;
+import com.acercow.oneday.constant.DeviceType;
+import com.acercow.oneday.constant.DocumentType;
 import com.acercow.oneday.data.Note;
 import com.acercow.oneday.data.NotesDataSource;
 import com.acercow.oneday.utils.DateUtils;
@@ -73,7 +75,7 @@ public class EditNotePresenter implements EditNoteContract.Presenter {
 
     @Override
     public void info() {
-        mEditNoteView.showInfoDialog();
+        mEditNoteView.showInfoDialog(mNote);
     }
 
     @Override
@@ -100,19 +102,17 @@ public class EditNotePresenter implements EditNoteContract.Presenter {
 
     @Override
     public void save(String title, String content, int weather, int color, int emotion) {
-        if (TextUtils.isEmpty(title)) {
-            title = "未标题";
-        }
         String date = DateUtils.getFormatDate();
-        if (mNote == null) { // 首次创建
+        if (isCreateNote()) { // 首次创建
             mNote = new Note();
             mNoteId = UUID.randomUUID().toString();
             mNote.setNoteGUID(mNoteId);
-            mNote.setNoteReadCount(0);
+            mNote.setNoteReadCount(1);
             mNote.setCreatedDate(date);
             mNote.setNoteDate(date);
             mNote.setSyncStatus(SyncStatus.LOCAL_ADDED);
             mNote.setNoteType(DocumentType.NOTE);
+            mNote.setLastEditDeviceType(DeviceType.ANDROID_PHONE);
         } else {
             mNote.setSyncStatus(SyncStatus.LOCAL_MODIFIED);
         }
@@ -121,12 +121,13 @@ public class EditNotePresenter implements EditNoteContract.Presenter {
         mNote.setNoteWeather(weather == -1 ? 0 : weather);
         mNote.setNoteColor(color == -1 ? 0 : color);
         mNote.setNoteEmotion(emotion == -1 ? 0 : emotion);
+        mNote.setLastEditDeviceName(String.format("%s %s", SystemUtils.getDeviceBrand(), SystemUtils.getSystemModel()));
 
         // TODO 日记日期
         mNote.setModifiedDate(date);
         mNote.setNoteAbstract(content.length() > 20 ? content.substring(0, 20) : content);
 
-        mDataSource.saveNote(mNote);
+        mDataSource.saveNote(mNote).subscribe();
     }
 
     @Override
@@ -149,7 +150,8 @@ public class EditNotePresenter implements EditNoteContract.Presenter {
 
     }
 
-    private boolean isEditNote() {
-        return !TextUtils.isEmpty(mNoteId);
+    @Override
+    public boolean isCreateNote() {
+        return TextUtils.isEmpty(mNoteId);
     }
 }

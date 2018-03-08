@@ -125,7 +125,8 @@ public class PreviewNoteFragment extends BaseFragment implements PreviewNoteCont
     @Override
     public void showNoteInWebView(Note note) {
 
-        String body = note.getNoteContent().replace("\n", "\\n");
+//        String body = note.getNoteContent().replaceAll("(\r\n|\r|\n|\n\r)", "\\n\\r");
+        String body = note.getNoteContent().replace("\n", "\\n\\r");
 
         String result = "<!doctype html>\n" +
                 "<html>\n" +

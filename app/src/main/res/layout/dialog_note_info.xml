@@ -1,92 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dp"
-    android:layout_height="wrap_content"
-    android:padding="20dp"
-    android:orientation="vertical">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/shape_radius_note_info_dialog"
+    android:padding="20dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <TextView
             android:id="@+id/note_info_dialog_day"
             android:layout_width="64dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="12"
-            android:textSize="56sp"/>
+            android:textSize="56sp" />
 
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:layout_marginLeft="8dp"
+            android:layout_weight="1"
             android:gravity="center_vertical">
+
             <TextView
                 android:id="@+id/note_info_dialog_month"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="JANUARY"/>
+                android:text="JANUARY" />
+
             <TextView
                 android:id="@+id/note_info_dialog_year"
-                android:layout_marginLeft="6dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
                 android:layout_toRightOf="@+id/note_info_dialog_month"
-                android:text="2017"/>
+                android:text="2017" />
+
             <TextView
                 android:id="@+id/note_info_dialog_week"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/note_info_dialog_year"
-                android:text="FRIDAY"/>
+                android:text="FRIDAY" />
 
-            <TextView
-                android:id="@+id/note_info_dialog_time"
-                android:layout_marginLeft="6dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/note_info_dialog_year"
-                android:layout_toRightOf="@+id/note_info_dialog_week"
-                android:text="14:20"/>
+            <!--<TextView-->
+                <!--android:id="@+id/note_info_dialog_time"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/note_info_dialog_year"-->
+                <!--android:layout_marginLeft="6dp"-->
+                <!--android:layout_toRightOf="@+id/note_info_dialog_week"-->
+                <!--android:text="14:20" />-->
         </RelativeLayout>
 
         <ImageView
+            android:id="@+id/note_info_dialog_close"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_dialog_close_light"/>
+            android:src="@drawable/ic_dialog_close_light" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.3dp"
-        android:background="@color/noteInfoDiv"/>
+        android:background="@color/noteInfoDiv" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:orientation="horizontal"
-        android:baselineAligned="false">
+        android:baselineAligned="false"
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/noteInfoNum"
-                android:text="921"
-                android:textSize="28sp"/>
 
             <TextView
+                android:id="@+id/note_info_dialog_characters"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/noteInfoLabel"
-                android:text="CHARACTERS"/>
+                android:text="921"
+                android:textColor="@color/noteInfoNum"
+                android:textSize="28sp" />
+
+            <TextView
+                style="@style/NoteInfoLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CHARACTERS" />
         </LinearLayout>
 
         <LinearLayout
@@ -95,18 +103,20 @@
             android:layout_marginLeft="40dp"
             android:layout_weight="1"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/noteInfoNum"
-                android:text="12"
-                android:textSize="28sp"/>
 
             <TextView
+                android:id="@+id/note_info_dialog_read_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/noteInfoLabel"
-                android:text="READ TIME"/>
+                android:text="12"
+                android:textColor="@color/noteInfoNum"
+                android:textSize="28sp" />
+
+            <TextView
+                style="@style/NoteInfoLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="READ COUNT" />
         </LinearLayout>
 
 
@@ -122,17 +132,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
+                android:id="@+id/note_info_dialog_create_at"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/noteInfoNum"
                 android:text="2017-10-12 12:20:25"
-                android:textSize="18sp"/>
+                android:textColor="@color/noteInfoNum"
+                android:textSize="16sp" />
+
             <TextView
+                style="@style/NoteInfoLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/noteInfoLabel"
-                android:text="CREATED AT"/>
+                android:text="CREATED AT" />
         </LinearLayout>
 
         <LinearLayout
@@ -140,18 +153,20 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/noteInfoNum"
-                android:text="2017-11-29 14:10:17"
-                android:textSize="18sp"/>
 
             <TextView
+                android:id="@+id/note_info_dialog_modified_at"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/noteInfoLabel"
-                android:text="LAST MODIFIED AT"/>
+                android:text="2017-11-29 14:10:17"
+                android:textColor="@color/noteInfoNum"
+                android:textSize="16sp" />
+
+            <TextView
+                style="@style/NoteInfoLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LAST MODIFIED AT" />
         </LinearLayout>
 
 
@@ -161,25 +176,44 @@
         android:layout_width="match_parent"
         android:layout_height="0.3dp"
         android:layout_marginTop="12dp"
-        android:background="@color/noteInfoDiv"/>
+        android:background="@color/noteInfoDiv" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
         android:layout_marginBottom="32dp"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Google PureNexus 6P"
-            android:textSize="18sp"/>
+        android:layout_marginTop="12dp"
+        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <ImageView
+            android:id="@+id/note_info_dialog_edited_device_icon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_vertical"
+            android:alpha="0.6"
+            android:src="@drawable/ic_phonelink_black_48dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/noteInfoLabel"
-            android:text="LAST EDITED AT"/>
+            android:layout_marginLeft="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/note_info_dialog_edited_device_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Google Nexus 6P"
+                android:textSize="16sp" />
+
+            <TextView
+                style="@style/NoteInfoLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LAST EDITED DEVICE"
+                android:textColor="@color/noteInfoLabel" />
+        </LinearLayout>
     </LinearLayout>
+
 
 </LinearLayout>

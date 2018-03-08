@@ -10,6 +10,7 @@ import com.acercow.oneday.data.NotesDataSource;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Function;
 
 /**
  * Preview Note Presenter in Markdown
@@ -51,6 +52,14 @@ public class PreviewNotePresenter implements PreviewNoteContract.Presenter {
         mCompositeDisposable.add(
                 mDataSource.getNote(noteId)
                         .observeOn(AndroidSchedulers.mainThread())
+                        .map(new Function<Note, Note>() {
+                            @Override
+                            public Note apply(Note note) throws Exception {
+                                note.setNoteReadCount(note.getNoteReadCount() + 1);
+                                mDataSource.updateNote(note).subscribe();
+                                return note;
+                            }
+                        })
                         .subscribe(item -> {
                             mIsDataMissing = false;
                             mNote = item;

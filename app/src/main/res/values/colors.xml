@@ -18,7 +18,8 @@
     <color name="toolbarMenuIconColor">#686868</color>
     <color name="noteInfoDiv">#686868</color>
     <color name="noteInfoLabel">#a7a7a7</color>
-    <color name="noteInfoNum">#00a6ff</color>
+    <color name="noteInfoNum">#00576b</color>
+    <color name="noteInfoDialogBackground">#FFFFFF</color>
 
 
 </resources>

@@ -101,6 +101,7 @@ public class EditNoteFragment extends BaseFragment implements EditNoteContract.V
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_edit_note, menu);
+        menu.findItem(R.id.action_note_info).setVisible(!mPresenter.isCreateNote());
         super.onCreateOptionsMenu(menu, inflater);
     }
 
@@ -216,11 +217,7 @@ public class EditNoteFragment extends BaseFragment implements EditNoteContract.V
     }
 
     @Override
-    public void showInfoDialog() {
-
-            // DialogFragment.show() will take care of adding the fragment
-            // in a transaction.  We also want to remove any currently showing
-            // dialog, so make our own transaction and take care of that here.
+    public void showInfoDialog(Note note) {
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             Fragment prev = getFragmentManager().findFragmentByTag("dialog");
             if (prev != null) {
@@ -229,7 +226,7 @@ public class EditNoteFragment extends BaseFragment implements EditNoteContract.V
             ft.addToBackStack(null);
 
             // Create and show the dialog.
-            NoteInfoDialog newFragment = new NoteInfoDialog();
+            NoteInfoDialog newFragment = NoteInfoDialog.newInstance(note);
             newFragment.show(ft, "dialog");
     }
 

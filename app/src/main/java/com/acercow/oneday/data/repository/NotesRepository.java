@@ -9,6 +9,7 @@ import org.reactivestreams.Publisher;
 
 import java.util.List;
 
+import io.reactivex.Completable;
 import io.reactivex.Flowable;
 import io.reactivex.functions.Function;
 
@@ -65,8 +66,8 @@ public class NotesRepository implements NotesDataSource {
     }
 
     @Override
-    public void saveNote(@NonNull Note note) {
-        mNotesLocalDataSource.saveNote(note);
+    public Completable saveNote(@NonNull Note note) {
+        return mNotesLocalDataSource.saveNote(note);
 //        if (mCachedNotes == null) {
 //            mCachedNotes = new LruCache<>(LRUCACHE_SIZE);
 //        }
@@ -74,9 +75,9 @@ public class NotesRepository implements NotesDataSource {
     }
 
     @Override
-    public void updateNote(@NonNull Note note) {
-        mNotesLocalDataSource.updateNote(note);
-        mNotesRemoteDataSource.updateNote(note);
+    public Completable updateNote(@NonNull Note note) {
+        return mNotesLocalDataSource.updateNote(note);
+//        mNotesRemoteDataSource.updateNote(note);
 //        if (mCachedNotes == null) {
 //            mCachedNotes = new LruCache<>(LRUCACHE_SIZE);
 //        }
@@ -84,9 +85,9 @@ public class NotesRepository implements NotesDataSource {
     }
 
     @Override
-    public void deleteNotes(@NonNull Note... notes) {
-        mNotesLocalDataSource.deleteNotes(notes);
-        mNotesRemoteDataSource.deleteNotes(notes);
+    public Completable deleteNotes(@NonNull Note... notes) {
+        return mNotesLocalDataSource.deleteNotes(notes);
+//        mNotesRemoteDataSource.deleteNotes(notes);
 //        if (mCachedNotes == null) {
 //            mCachedNotes = new LruCache<>(LRUCACHE_SIZE);
 //        }
@@ -96,9 +97,9 @@ public class NotesRepository implements NotesDataSource {
     }
 
     @Override
-    public void deleteAll() {
-        mNotesLocalDataSource.deleteAll();
-        mNotesRemoteDataSource.deleteAll();
+    public Completable deleteAll() {
+        return mNotesLocalDataSource.deleteAll();
+//        mNotesRemoteDataSource.deleteAll();
 //        if (mCachedNotes == null) {
 //            mCachedNotes = new LruCache<>(LRUCACHE_SIZE);
 //        }
