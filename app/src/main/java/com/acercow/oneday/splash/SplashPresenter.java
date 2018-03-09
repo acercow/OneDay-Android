@@ -10,9 +10,9 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 
 import com.acercow.androidlib.utils.ExecutorUtils;
-import com.acercow.oneday.bean.DiaryBean;
-import com.acercow.oneday.bean.TaskBean;
-import com.acercow.oneday.bean.UserInfoBean;
+import com.acercow.oneday.dialog.bean.DiaryBean;
+import com.acercow.oneday.dialog.bean.TaskBean;
+import com.acercow.oneday.dialog.bean.UserInfoBean;
 
 import java.lang.ref.WeakReference;
 import java.util.Timer;

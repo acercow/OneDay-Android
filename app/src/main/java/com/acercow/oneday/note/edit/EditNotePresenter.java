@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.text.TextUtils;
 
 import com.acercow.androidlib.utils.SystemUtils;
-import com.acercow.oneday.bean.SyncStatus;
+import com.acercow.oneday.dialog.bean.SyncStatus;
 import com.acercow.oneday.constant.DeviceType;
 import com.acercow.oneday.constant.DocumentType;
 import com.acercow.oneday.data.Note;

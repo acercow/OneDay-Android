@@ -1,4 +1,4 @@
-package com.acercow.oneday.bean;
+package com.acercow.oneday.dialog.bean;
 
 /**
  * Created by zhaosen on 2018/2/1.

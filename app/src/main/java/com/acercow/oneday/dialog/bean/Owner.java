@@ -1,5 +1,5 @@
 
-package com.acercow.oneday.bean;
+package com.acercow.oneday.dialog.bean;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -1,6 +1,6 @@
 package com.acercow.oneday.net;
 
-import com.acercow.oneday.bean.SOAnswersResponse;
+import com.acercow.oneday.dialog.bean.SOAnswersResponse;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

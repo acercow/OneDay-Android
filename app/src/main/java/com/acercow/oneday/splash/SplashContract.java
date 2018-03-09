@@ -5,9 +5,9 @@ import android.graphics.drawable.Drawable;
 
 import com.acercow.oneday.BasePresenter;
 import com.acercow.oneday.BaseView;
-import com.acercow.oneday.bean.DiaryBean;
-import com.acercow.oneday.bean.TaskBean;
-import com.acercow.oneday.bean.UserInfoBean;
+import com.acercow.oneday.dialog.bean.DiaryBean;
+import com.acercow.oneday.dialog.bean.TaskBean;
+import com.acercow.oneday.dialog.bean.UserInfoBean;
 
 /**
  * Created by JansenZhao on 2017/11/15.
